@@ -8,6 +8,6 @@ namespace BackeryShopDomain.Classes
 		public string Name { get; set; }
 
 		public ICollection<PriceListDetail> PriceListDetail { get; set; }
-		public ICollection<Bakery> Bakery { get; set; }
+		public ICollection<Backery> Backery { get; set; }
 	}
 }

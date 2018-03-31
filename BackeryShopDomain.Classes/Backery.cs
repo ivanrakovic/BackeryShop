@@ -1,6 +1,6 @@
 ﻿namespace BackeryShopDomain.Classes
 {
-	public class Bakery
+	public class Backery
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
