@@ -28,7 +28,7 @@ namespace BackeryShop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -66,7 +66,7 @@ namespace BackeryShop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace BackeryShop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -110,7 +110,7 @@ namespace BackeryShop.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
+            var product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");

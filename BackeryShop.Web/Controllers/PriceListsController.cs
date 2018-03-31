@@ -28,7 +28,7 @@ namespace BackeryShop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PriceList priceList = db.PriceLists.Find(id);
+            var priceList = db.PriceLists.Find(id);
             if (priceList == null)
             {
                 return HttpNotFound();
@@ -66,7 +66,7 @@ namespace BackeryShop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PriceList priceList = db.PriceLists.Find(id);
+            var priceList = db.PriceLists.Find(id);
             if (priceList == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace BackeryShop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PriceList priceList = db.PriceLists.Find(id);
+            var priceList = db.PriceLists.Find(id);
             if (priceList == null)
             {
                 return HttpNotFound();
@@ -110,7 +110,7 @@ namespace BackeryShop.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PriceList priceList = db.PriceLists.Find(id);
+            var priceList = db.PriceLists.Find(id);
             db.PriceLists.Remove(priceList);
             db.SaveChanges();
             return RedirectToAction("Index");
