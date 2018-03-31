@@ -190,8 +190,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BackeriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PriceListDetailsController.cs" />
+    <Compile Include="Controllers\PriceListsController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -258,6 +262,26 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Backeries\Create.cshtml" />
+    <Content Include="Views\Backeries\Delete.cshtml" />
+    <Content Include="Views\Backeries\Details.cshtml" />
+    <Content Include="Views\Backeries\Edit.cshtml" />
+    <Content Include="Views\Backeries\Index.cshtml" />
+    <Content Include="Views\PriceLists\Create.cshtml" />
+    <Content Include="Views\PriceLists\Delete.cshtml" />
+    <Content Include="Views\PriceLists\Details.cshtml" />
+    <Content Include="Views\PriceLists\Edit.cshtml" />
+    <Content Include="Views\PriceLists\Index.cshtml" />
+    <Content Include="Views\PriceListDetails\Create.cshtml" />
+    <Content Include="Views\PriceListDetails\Delete.cshtml" />
+    <Content Include="Views\PriceListDetails\Details.cshtml" />
+    <Content Include="Views\PriceListDetails\Edit.cshtml" />
+    <Content Include="Views\PriceListDetails\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
