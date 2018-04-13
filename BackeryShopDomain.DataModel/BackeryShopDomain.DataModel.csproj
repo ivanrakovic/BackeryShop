@@ -56,6 +56,10 @@
     <Compile Include="Migrations\201804011247167_fix.Designer.cs">
       <DependentUpon>201804011247167_fix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804011316490_ValidationsAdded.cs" />
+    <Compile Include="Migrations\201804011316490_ValidationsAdded.Designer.cs">
+      <DependentUpon>201804011316490_ValidationsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,6 +79,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804011247167_fix.resx">
       <DependentUpon>201804011247167_fix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011316490_ValidationsAdded.resx">
+      <DependentUpon>201804011316490_ValidationsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
