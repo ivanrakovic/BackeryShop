@@ -60,6 +60,14 @@
     <Compile Include="Migrations\201804011316490_ValidationsAdded.Designer.cs">
       <DependentUpon>201804011316490_ValidationsAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805091201031_AddTurnover.cs" />
+    <Compile Include="Migrations\201805091201031_AddTurnover.Designer.cs">
+      <DependentUpon>201805091201031_AddTurnover.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805091213067_UpdateTurnover.cs" />
+    <Compile Include="Migrations\201805091213067_UpdateTurnover.Designer.cs">
+      <DependentUpon>201805091213067_UpdateTurnover.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +90,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804011316490_ValidationsAdded.resx">
       <DependentUpon>201804011316490_ValidationsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091201031_AddTurnover.resx">
+      <DependentUpon>201805091201031_AddTurnover.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091213067_UpdateTurnover.resx">
+      <DependentUpon>201805091213067_UpdateTurnover.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

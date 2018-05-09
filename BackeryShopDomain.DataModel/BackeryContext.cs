@@ -10,9 +10,10 @@ namespace BackeryShopDomain.DataModel
 	    public DbSet<PriceList> PriceLists { get; set; }
 	    public DbSet<PriceListDetail> PriceListDetails { get; set; }
 	    public DbSet<Product> Products { get; set; }
+        public DbSet<Turnover> Turnovers { get; set; }
+        public DbSet<TurnoverDetail> TurnoverDetails { get; set; }
 
-
-	    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
 	    {
 		    modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 		}

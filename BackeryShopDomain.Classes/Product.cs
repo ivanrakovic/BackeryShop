@@ -11,5 +11,6 @@ namespace BackeryShopDomain.Classes
 		[Index("IX_ProductName", IsUnique = true)]
 		public string Name { get; set; }
 		public ICollection<PriceListDetail> PriceListDetail { get; set; }
-	}
+	    public ICollection<TurnoverDetail> TurnoverDetail { get; set; }
+    }
 }

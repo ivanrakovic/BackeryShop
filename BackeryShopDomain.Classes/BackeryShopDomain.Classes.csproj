@@ -48,10 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backery.cs" />
+    <Compile Include="Turnover.cs" />
     <Compile Include="PriceList.cs" />
     <Compile Include="PriceListDetail.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TurnoverDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
