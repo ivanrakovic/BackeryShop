@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201805100907366_UpdateTurnover2.Designer.cs">
       <DependentUpon>201805100907366_UpdateTurnover2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805101344551_AddEnabledProductProperty.cs" />
+    <Compile Include="Migrations\201805101344551_AddEnabledProductProperty.Designer.cs">
+      <DependentUpon>201805101344551_AddEnabledProductProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -124,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805100907366_UpdateTurnover2.resx">
       <DependentUpon>201805100907366_UpdateTurnover2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805101344551_AddEnabledProductProperty.resx">
+      <DependentUpon>201805101344551_AddEnabledProductProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
