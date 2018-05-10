@@ -1,0 +1,75 @@
+﻿@model IEnumerable<BackeryShopDomain.Classes.TurnoverDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Turnover.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PreviousBalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BakedNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Scrap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewBalance)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Turnover.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PreviousBalance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BakedNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Scrap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NewBalance)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

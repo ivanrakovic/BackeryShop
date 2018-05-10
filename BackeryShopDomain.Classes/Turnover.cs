@@ -14,8 +14,10 @@ namespace BackeryShopDomain.Classes
         [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         public int ShiftNo { get; set; }
 
+        public int BackeryId { get; set; }
+        public Backery Backery { get; set; }
 
         public ICollection<TurnoverDetail> TurnoverDetail { get; set; }
-        public ICollection<Backery> Backery { get; set; }
+ 
     }
 }

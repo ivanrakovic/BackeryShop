@@ -68,6 +68,22 @@
     <Compile Include="Migrations\201805091213067_UpdateTurnover.Designer.cs">
       <DependentUpon>201805091213067_UpdateTurnover.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805091353402_AddBakeryId.cs" />
+    <Compile Include="Migrations\201805091353402_AddBakeryId.Designer.cs">
+      <DependentUpon>201805091353402_AddBakeryId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805091403249_AddBakeryId1.cs" />
+    <Compile Include="Migrations\201805091403249_AddBakeryId1.Designer.cs">
+      <DependentUpon>201805091403249_AddBakeryId1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805100851507_UpdateTurnover1.cs" />
+    <Compile Include="Migrations\201805100851507_UpdateTurnover1.Designer.cs">
+      <DependentUpon>201805100851507_UpdateTurnover1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805100907366_UpdateTurnover2.cs" />
+    <Compile Include="Migrations\201805100907366_UpdateTurnover2.Designer.cs">
+      <DependentUpon>201805100907366_UpdateTurnover2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -96,6 +112,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805091213067_UpdateTurnover.resx">
       <DependentUpon>201805091213067_UpdateTurnover.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091353402_AddBakeryId.resx">
+      <DependentUpon>201805091353402_AddBakeryId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091403249_AddBakeryId1.resx">
+      <DependentUpon>201805091403249_AddBakeryId1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805100851507_UpdateTurnover1.resx">
+      <DependentUpon>201805100851507_UpdateTurnover1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805100907366_UpdateTurnover2.resx">
+      <DependentUpon>201805100907366_UpdateTurnover2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

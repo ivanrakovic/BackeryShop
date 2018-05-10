@@ -190,6 +190,8 @@
     <Compile Include="Controllers\PriceListDetailsController.cs" />
     <Compile Include="Controllers\PriceListsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\TurnoverDetailsController.cs" />
+    <Compile Include="Controllers\TurnoversController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,6 +278,16 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Turnovers\Create.cshtml" />
+    <Content Include="Views\Turnovers\Delete.cshtml" />
+    <Content Include="Views\Turnovers\Details.cshtml" />
+    <Content Include="Views\Turnovers\Edit.cshtml" />
+    <Content Include="Views\Turnovers\Index.cshtml" />
+    <Content Include="Views\TurnoverDetails\Create.cshtml" />
+    <Content Include="Views\TurnoverDetails\Delete.cshtml" />
+    <Content Include="Views\TurnoverDetails\Details.cshtml" />
+    <Content Include="Views\TurnoverDetails\Edit.cshtml" />
+    <Content Include="Views\TurnoverDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

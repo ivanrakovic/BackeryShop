@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BackeryShopDomain.Classes
@@ -18,5 +19,7 @@ namespace BackeryShopDomain.Classes
 
 		[Required]
 		public int PriceListId { get; set; }
-	}
+
+	    public ICollection<Turnover> Turnover { get; set; }
+    }
 }
