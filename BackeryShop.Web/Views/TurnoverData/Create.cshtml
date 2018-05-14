@@ -1,0 +1,65 @@
+﻿@model BackeryShop.Web.Models.ViewModels.TurnoverViewModel
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Unos za @Model.Backery.Name</h2>
+
+<div class="table-responsive">
+    <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+        <thead>
+            <tr>
+                <th style="width:5%">
+                    Id
+                </th>
+                <th style="width:25%">Naziv proizvoda</th>
+                <th style="width:10%" class="hidden-phone">Cena</th>
+                <th style="width:10%" class="hidden-phone">Staro Stanje</th>
+                <th style="width:10%" class="hidden-phone">Novo Stanje</th>
+                <th style="width:10%" class="hidden-phone">Došlo</th>
+                <th style="width:10%" class="hidden-phone">Škart</th>
+                <th style="width:10%" class="hidden-phone">Prodato</th>
+                <th style="width:10%" class="hidden-phone">Ukupno</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var i = 1; }
+            @foreach (var item in Model.TurnoverProductsViewModels)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProdtId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DisplayName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td class="hidden-phone">
+                        <input class="form-control no-margin" type="text" id="PreviousBalance_@i" />
+                    </td>
+                    <td class="hidden-phone">
+                        <input class="form-control" type="text" id="NewBalance_@i" />
+                    </td>
+                    <td class="hidden-phone">
+                        <input class="form-control" type="text" id="BakedNew_@i" />
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" id="Scrap_@i" />
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" id="Sold_@i" />
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" id="Total_@i" />
+                    </td>
+                </tr>
+                i = i + 1;
+            }
+        </tbody>
+    </table>
+</div>

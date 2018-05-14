@@ -190,6 +190,7 @@
     <Compile Include="Controllers\PriceListDetailsController.cs" />
     <Compile Include="Controllers\PriceListsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\TurnoverDataController.cs" />
     <Compile Include="Controllers\TurnoverDetailsController.cs" />
     <Compile Include="Controllers\TurnoversController.cs" />
     <Compile Include="Global.asax.cs">
@@ -198,6 +199,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\TurnoverProductViewModel.cs" />
+    <Compile Include="Models\ViewModels\TurnoverViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -288,6 +291,7 @@
     <Content Include="Views\TurnoverDetails\Details.cshtml" />
     <Content Include="Views\TurnoverDetails\Edit.cshtml" />
     <Content Include="Views\TurnoverDetails\Index.cshtml" />
+    <Content Include="Views\TurnoverData\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
