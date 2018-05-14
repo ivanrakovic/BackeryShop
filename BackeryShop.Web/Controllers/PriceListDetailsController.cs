@@ -39,10 +39,19 @@ namespace BackeryShop.Web.Controllers
         }
 
         // GET: PriceListDetails/Create
-        public ActionResult Create()
+        //public ActionResult Create()
+        //{
+        //    ViewBag.PriceListId = new SelectList(db.PriceLists, "Id", "Name");
+        //    ViewBag.ProductId = new SelectList(db.Products, "Id", "Name");
+        //    return View();
+        //}
+
+        public ActionResult Create(int? id)
         {
-            ViewBag.PriceListId = new SelectList(db.PriceLists, "Id", "Name");
-            ViewBag.ProductId = new SelectList(db.Products, "Id", "Name");
+            
+            ViewBag.PriceListId = new SelectList(db.PriceLists.Where(p => p.Id == id), "Id", "Name", id);
+            var productsForList = db.Products.Where(p => !db.PriceListDetails.Where(x => x.PriceListId == id).Any(p2 => p2.ProductId == p.Id));
+            ViewBag.ProductId = new SelectList(productsForList, "Id", "Name");
             return View();
         }
 
