@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+    input.js-decimal {
+        text-align: right;
+        padding: 3px 3px;
+        height: 25px;
+    }
