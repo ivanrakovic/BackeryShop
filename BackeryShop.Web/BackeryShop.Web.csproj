@@ -205,7 +205,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClientUI\backery.js" />
+    <Content Include="ClientUI\js\backery.js" />
+    <Content Include="ClientUI\js\backery.turnover.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

@@ -4,29 +4,36 @@
 @{
     ViewBag.Title = "Create";
 }
-
 <h2>Unos za @Model.Backery.Name</h2>
 
-<div class="table-responsive">
-    <table class="table table-condensed table-striped table-bordered table-hover no-margin">
-        <thead>
-            <tr>
-                <th style="width:5%">
-                    Id
-                </th>
-                <th style="width:25%">Naziv proizvoda</th>
-                <th style="width:10%" class="hidden-phone">Cena</th>
-                <th style="width:10%" class="hidden-phone">Staro Stanje</th>
-                <th style="width:10%" class="hidden-phone">Novo Stanje</th>
-                <th style="width:10%" class="hidden-phone">Došlo</th>
-                <th style="width:10%" class="hidden-phone">Škart</th>
-                <th style="width:10%" class="hidden-phone">Prodato</th>
-                <th style="width:10%" class="hidden-phone">Ukupno</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{ var i = 1; }
-            @foreach (var item in Model.TurnoverProductsViewModels)
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="turnover-input">
+            <div id="turnover-date-input"></div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="table-responsive">
+            <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+                <thead>
+                    <tr>
+                        <th style="width:5%">
+                            Id
+                        </th>
+                        <th style="width:25%">Naziv proizvoda</th>
+                        <th style="width:10%" class="hidden-phone">Cena</th>
+                        <th style="width:10%" class="hidden-phone">Staro Stanje</th>
+                        <th style="width:10%" class="hidden-phone">Novo Stanje</th>
+                        <th style="width:10%" class="hidden-phone">Došlo</th>
+                        <th style="width:10%" class="hidden-phone">Škart</th>
+                        <th style="width:10%" class="hidden-phone">Prodato</th>
+                        <th style="width:10%" class="hidden-phone">Ukupno</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var i = 1; }
+                    @foreach (var item in Model.TurnoverProductsViewModels)
             {
 
                 <tr>
@@ -58,8 +65,23 @@
                         <input class="form-control" type="text" id="Total_@i" />
                     </td>
                 </tr>
-                i = i + 1;
-            }
-        </tbody>
-    </table>
+        i = i + 1;
+    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
+
+
+
+    
+
+
+    @section Scripts {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.rs-latin.min.js"></script>
+        @Scripts.Render("~/bundles/backery")
+    }
