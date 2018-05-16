@@ -31,17 +31,17 @@
             <table class="table table-condensed table-striped table-bordered table-hover no-margin">
                 <thead>
                     <tr>
-                        <th style="width:5%">
+                        <th class="col-md-1">
                             Id
                         </th>
-                        <th style="width:25%">Naziv proizvoda</th>
-                        <th style="width:10%" class="hidden-phone">Cena</th>
-                        <th style="width:10%" class="hidden-phone">Staro Stanje</th>
-                        <th style="width:10%" class="hidden-phone">Novo Stanje</th>
-                        <th style="width:10%" class="hidden-phone">Došlo</th>
-                        <th style="width:10%" class="hidden-phone">Škart</th>
-                        <th style="width:10%" class="hidden-phone">Prodato</th>
-                        <th style="width:10%" class="hidden-phone">Ukupno</th>
+                        <th class="col-md-2">Naziv proizvoda</th>
+                        <th class="col-md-1">Cena</th>
+                        <th class="col-md-1">Staro Stanje</th>
+                        <th class="col-md-1">Novo Stanje</th>
+                        <th class="col-md-1">Došlo</th>
+                        <th class="col-md-1">Škart</th>
+                        <th class="col-md-1">Prodato</th>
+                        <th class="col-md-1">Ukupno</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,7 +60,7 @@
                                 @Html.DisplayFor(modelItem => item.Price)
                             </td>
                             <td class="hidden-phone">
-                                <input class="form-control js-decimal" type="text" id="PreviousBalance_@i" value="@item.Balance"/>
+                                <input class="form-control js-decimal" type="text" id="PreviousBalance_@i" readonly value="@item.Balance"/>
                             </td>
                             <td class="hidden-phone">
                                 <input class="form-control js-decimal" type="text" id="NewBalance_@i" value="0"/>
@@ -75,7 +75,7 @@
                                 <input class="form-control js-decimal" type="text" id="Sold_@i" value="0"/>
                             </td>
                             <td>
-                                <input class="form-control js-decimal" type="text" id="Total_@i" value="0"/>
+                                <input class="form-control js-decimal" type="text" id="Total_@i" readonly value="0"/>
                             </td>
                         </tr>
                         i = i + 1;

@@ -5,20 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc.Html;
 
 namespace BackeryShop.Web.Services
 {
     public static class TurnoverService
     {
-
-
-
         public static List<TurnoverProductViewModel> GetDataForNewTurnover(Backery backery)
         {
-            
             var result = new List<TurnoverProductViewModel>();
             var lastId = GetLastTurnoverId(backery);
-            //var newData = GetNextTurnoverDataFromTurnoverId(backery, lastId);
             using (var db = new BackeryContext())
             {
                 result = (from b in db.Backeries
@@ -34,39 +30,38 @@ namespace BackeryShop.Web.Services
                               Price = pld.Price
                           }).ToList();
             }
-
-            var oldBalances = GetPreviousBackeryBalanceForTurnoverId(backery, lastId);
-            //foreach (var item in result)
-            //{
-                
-            //}
-            return result;
-        }
-
-
-
-        public static List<TurnoverProductViewModel> GetPreviousBackeryBalanceForTurnoverId(Backery backery, int turnoverId)
-        {
-            var result = new List<TurnoverProductViewModel>();
-            var prevData = GetPreviousTurnoverDataFromTurnoverId(backery, turnoverId);
-            if (prevData != null)
+            var oldBalances = GetBalancesForTurnoverId(backery, lastId);
+            if (oldBalances.Any())
             {
-                using (var db = new BackeryContext())
+                foreach (var item in result)
                 {
-                    result = (from td in db.Turnovers
-                              join tdd in db.TurnoverDetails on td.Id equals tdd.TurnoverId
-                              where td.BackeryId == prevData.Id && td.ShiftNo == prevData.ShiftNo && td.Date.Equals(prevData.Date)
-                              select new TurnoverProductViewModel
-                              {
-                                  ProdtId = tdd.ProductId,
-                                  Balance = tdd.PreviousBalance
-                              }
-                   ).ToList();
+                    var oldBal = oldBalances.Where(x => x.ProdtId == item.ProdtId);
+                    if (oldBal.Any())
+                    {
+                        item.Balance = oldBal.First().Balance;
+                    }                    
                 }
             }
             return result;
         }
 
+        public static List<TurnoverProductViewModel> GetBalancesForTurnoverId(Backery backery, int turnoverId)
+        {
+            var result = new List<TurnoverProductViewModel>();
+            using (var db = new BackeryContext())
+            {
+                result = (from td in db.Turnovers
+                          join tdd in db.TurnoverDetails on td.Id equals tdd.TurnoverId
+                          where td.BackeryId == backery.Id && td.Id == turnoverId
+                          select new TurnoverProductViewModel
+                          {
+                              ProdtId = tdd.ProductId,
+                              Balance = tdd.PreviousBalance
+                          }
+                    ).ToList();
+            }
+            return result;
+        }
 
         public static Turnover GetNextTurnoverDataForBakery(Backery backery)
         {
@@ -74,7 +69,7 @@ namespace BackeryShop.Web.Services
             return GetNextTurnoverDataFromTurnoverId(backery, lastId);
         }
 
-        public static int GetLastTurnoverId(Backery backery)
+        private static int GetLastTurnoverId(Backery backery)
         {
             var id = 0;
             using (var db = new BackeryContext())
@@ -110,7 +105,7 @@ namespace BackeryShop.Web.Services
             return result;
         }
 
-        public static Turnover GetPreviousTurnoverDataFromTurnoverId(Backery backery, int turnoverId)
+        private static Turnover GetPreviousTurnoverDataFromTurnoverId(Backery backery, int turnoverId)
         {
             using (var db = new BackeryContext())
             {
