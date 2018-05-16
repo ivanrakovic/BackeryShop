@@ -45,6 +45,30 @@ namespace BackeryShop.Web.Services
             return result;
         }
 
+        public static List<TurnoverProductViewModel> GetDataForTurnover(Backery backery, DateTime date, int shift)
+        {
+            var result = new List<TurnoverProductViewModel>();
+            using (var db = new BackeryContext())
+            {
+                result = (from b in db.Backeries
+                    join pl in db.PriceLists on b.PriceListId equals pl.Id
+                    join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
+                    join p in db.Products on pld.ProductId equals p.Id
+                    where b.Id == backery.Id
+                    orderby pld.OrderNo descending
+                    select new TurnoverProductViewModel
+                    {
+                        DisplayName = p.Name,
+                        ProdtId = p.Id,
+                        Price = pld.Price
+                    }).ToList();
+            }
+
+           // GetTurnoverIdFromDataAndShift
+
+            return result;
+        }
+
         public static List<TurnoverProductViewModel> GetBalancesForTurnoverId(Backery backery, int turnoverId)
         {
             var result = new List<TurnoverProductViewModel>();
@@ -117,6 +141,20 @@ namespace BackeryShop.Web.Services
                 result.Date = (turnData.ShiftNo == 1) ? turnData.Date.AddDays(-1) : turnData.Date;
                 return result;
             }
+        }
+
+        private static int GetTurnoverIdFromDataAndShift(Backery backery, DateTime date, int shift)
+        {
+            var id = 0;
+            using (var db = new BackeryContext())
+            {
+                var t = db.Turnovers.Where(x => x.Date == date && x.BackeryId == backery.Id && x.ShiftNo == shift);
+                if (t.Any())
+                {
+                    id = t.Max(i => i.Id);
+                }
+                return id;
+            };
         }
     }
 }
