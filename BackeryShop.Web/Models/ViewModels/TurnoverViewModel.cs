@@ -14,6 +14,8 @@ namespace BackeryShop.Web.Models.ViewModels
         }
 
         public Backery Backery { get; set; }
+        public DateTime Date { get; set; }
+        public int Shift { get; set; }
         public List<TurnoverProductViewModel> TurnoverProductsViewModels { get; set; }
 
     }

@@ -7,6 +7,6 @@ namespace BackeryShop.Web.Models.ViewModels
         public int ProdtId { get; set;}
         public string DisplayName { get; set; }
         public decimal Price { get; set; }
-        public decimal PreviousBalance { get; set; }
+        public decimal Balance { get; set; }
     }
 }

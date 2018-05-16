@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using BackeryShop.Web.Models.ViewModels;
 using BackeryShop.Web.Services;
+using BackeryShopDomain.Classes;
 using BackeryShopDomain.DataModel;
 
 namespace BackeryShop.Web.Controllers
@@ -16,11 +18,16 @@ namespace BackeryShop.Web.Controllers
             {
                 var backery = db.Backeries.Find(id);
                 model.Backery = backery;
-                model.TurnoverProductsViewModels = TurnoverService.GetTurnoversForBackery(backery);
             };
+
+            var newDataForBakery = TurnoverService.GetNextTurnoverDataForBakery(model.Backery);
+            model.Shift = newDataForBakery.ShiftNo;
+            model.Date = newDataForBakery.Date;
+            model.TurnoverProductsViewModels = TurnoverService.GetDataForNewTurnover(model.Backery);
+
             return View(model);
         }
 
-        
+
     }
 }
