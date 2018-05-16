@@ -2,14 +2,13 @@
 
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Dodaj novu listu";
 }
 <h2>Unos za @Model.Backery.Name</h2>
 
 
 <div class="row">
     <div class="col-md-3">
-
         <div class="form-group">
             <div class="col-md-10">
                 <div id="turnover-date-input"></div>
@@ -25,9 +24,6 @@
                 }
             </div>
         </div>
-
-
-
     </div>
     <div class="col-md-9">
         <div class="table-responsive">
@@ -69,7 +65,7 @@
                                 <input class="form-control js-decimal" type="text" id="NewBalance_@i" />
                             </td>
                             <td class="hidden-phone">
-                                <input class="form-control js-decimal" type="text" id="BakedNew_@i"  />
+                                <input class="form-control js-decimal" type="text" id="BakedNew_@i" />
                             </td>
                             <td>
                                 <input class="form-control js-decimal" type="text" id="Scrap_@i" />
@@ -90,16 +86,12 @@
 </div>
 
 
-
-
-
-
-
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.rs-latin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.js"></script>
+    @*@Scripts.Render("~/bundles/inputmask")*@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/backery")
 }

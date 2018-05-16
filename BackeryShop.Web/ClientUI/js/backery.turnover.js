@@ -12,7 +12,14 @@ Backery.turnover = (function ($) {
         language: "rs-latin"
     });
 
-    $('.js-decimal').mask("#0.00", { reverse: true });
+    $('.js-decimal').inputmask({
+        alias: "decimal",
+        integerDigits: 5,
+        digits: 2,
+        digitsOptional: false,
+        placeholder: "0",
+        allowMinus: false
+    });
 
     return me;
 }(jQuery));
