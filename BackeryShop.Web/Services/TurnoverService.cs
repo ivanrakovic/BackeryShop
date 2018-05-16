@@ -90,30 +90,38 @@ namespace BackeryShop.Web.Services
 
         public static Turnover GetNextTurnoverDataFromTurnoverId(Backery backery, int turnoverId)
         {
-            var result = new Turnover();
+            var result = new Turnover
+            {
+                BackeryId = backery.Id,
+                ShiftNo = 1,
+                Date = DateTime.Today
+            };
             using (var db = new BackeryContext())
             {
                 var turnData = db.Turnovers.Find(turnoverId);
+                if (turnData != null)
+                {
+                    result.BackeryId = backery.Id;
+                    result.ShiftNo = (backery.NumberOfShifts == turnData.ShiftNo) ? 1 : turnData.ShiftNo + 1;
+                    result.Date = (backery.NumberOfShifts == turnData.ShiftNo) ? turnData.Date.AddDays(1) : turnData.Date;
+                }
 
-                result.BackeryId = backery.Id;
-                result.ShiftNo = (backery.NumberOfShifts == turnData.ShiftNo) ? 1 : turnData.ShiftNo + 1;
-                result.Date = (backery.NumberOfShifts == turnData.ShiftNo) ? turnData.Date.AddDays(1) : turnData.Date;
             }
             return result;
         }
 
         public static Turnover GetPreviousTurnoverDataFromTurnoverId(Backery backery, int turnoverId)
         {
-            var result = new Turnover();
             using (var db = new BackeryContext())
             {
+                var result = new Turnover();
                 var turnData = db.Turnovers.Find(turnoverId);
-
+                if (turnData == null) return null;
                 result.BackeryId = backery.Id;
                 result.ShiftNo = (turnData.ShiftNo == 1) ? backery.NumberOfShifts : turnData.ShiftNo - 1;
                 result.Date = (turnData.ShiftNo == 1) ? turnData.Date.AddDays(-1) : turnData.Date;
+                return result;
             }
-            return result;
         }
     }
 }
