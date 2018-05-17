@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<BackeryShopDomain.Classes.PriceListDetail>
-
 @{
+
+
     ViewBag.Title = "Detalji cenovnika";
 }
 
 <h2>Detalji cenovnika</h2>
 
 <p>
-    @Html.ActionLink("Dodajte nov proizvod", "Create", "PriceListDetails",  new { id = @Model?.First().PriceListId }, null))
+    @Html.ActionLink("Dodajte nov proizvod", "Create", "PriceListDetails", new { id = @Model?.First().PriceListId }, null)
 </p>
 <table class="table">
     <tr>
@@ -42,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.OrderNo)
             </td>
             <td>
-                @Html.ActionLink("Izmenite", "Edit", new { id = item.Id }) |
+                <a class="js-edit-pricelist-detail" href="#" data-id="@item.Id">Izmenite</a> |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
@@ -50,3 +51,54 @@
     }
 
 </table>
+
+
+
+<div class="modal fade " role="dialog" id="pricelistdet">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <div id="pricelist-container"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.js-edit-pricelist-detail').click(function (e) {
+            e.preventDefault();
+            var url = "/PriceListDetails/Edit"; // the url to the controller
+            var recId = $(this).attr('data-id'); // the id that's given to each button in the list
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: { id: recId },
+                success: function (data) {
+                    var m = $('#pricelistdet');
+                    m.find('#pricelist-container').html(data);
+                    m.modal('show');
+                }
+            });
+
+
+        });
+
+    });
+</script>

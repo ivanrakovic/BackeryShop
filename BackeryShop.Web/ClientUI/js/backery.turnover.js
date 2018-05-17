@@ -9,7 +9,7 @@ Backery.turnover = (function ($) {
         todayHighlight: true,
         weekStart: 1,
         todayBtn: "linked",
-        language: "rs-latin"
+        language: "sr-latin"
     });
 
     $('.js-decimal').inputmask({
@@ -25,6 +25,9 @@ Backery.turnover = (function ($) {
         $('#pricelistdetail').load(this.href);
         return false;
     });
+
+
+
 
     return me;
 }(jQuery));

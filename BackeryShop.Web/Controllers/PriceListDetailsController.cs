@@ -88,7 +88,7 @@ namespace BackeryShop.Web.Controllers
             }
             ViewBag.PriceListId = new SelectList(db.PriceLists, "Id", "Name", priceListDetail.PriceListId);
             ViewBag.ProductId = new SelectList(db.Products, "Id", "Name", priceListDetail.ProductId);
-            return View(priceListDetail);
+            return PartialView(priceListDetail);
         }
 
         // POST: PriceListDetails/Edit/5
