@@ -1,10 +1,10 @@
 ﻿@model BackeryShopDomain.Classes.PriceList
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Kreirajte novi cenovnik";
 }
 
-<h2>Create</h2>
+<h2>Kreirajte novi cenovnik</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>PriceList</h4>
+        <h4>Naziv cenovnik</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -25,14 +25,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Snimi" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Nazad na listu", "Index")
 </div>
 
 @section Scripts {
