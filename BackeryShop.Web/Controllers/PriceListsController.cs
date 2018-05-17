@@ -28,12 +28,10 @@ namespace BackeryShop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var priceList = db.PriceLists.Find(id);
-            if (priceList == null)
-            {
-                return HttpNotFound();
-            }
-            return View(priceList);
+
+            var priceListDetails = db.PriceListDetails.Where(x=> x.PriceListId == id).Include(p => p.PriceList).Include(p => p.Product);
+ 
+            return PartialView(priceListDetails.ToList());
         }
 
         // GET: PriceLists/Create

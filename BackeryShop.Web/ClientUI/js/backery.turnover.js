@@ -21,5 +21,10 @@ Backery.turnover = (function ($) {
         allowMinus: false
     });
 
+    $('.js-pricelist-details').click(function () {
+        $('#pricelistdetail').load(this.href);
+        return false;
+    });
+
     return me;
 }(jQuery));
