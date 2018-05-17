@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<BackeryShopDomain.Classes.Product>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pregled proizvoda";
 }
 
-<h2>Index</h2>
+<h2>Pregled proizvoda</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodavanje novog", "Create")
 </p>
 <table class="table">
     <tr>
@@ -30,8 +30,7 @@
         </td>
         <td>
             @Html.ActionLink("Izmenite", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Brisanje", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

@@ -7,15 +7,19 @@ namespace BackeryShopDomain.Classes
 		public int Id { get; set; }
 
 		[Range(0, 1000000)]
-		public decimal Price { get; set; }
-		public int OrderNo { get; set; }
+        [Display(Name = "Cena")]
+        public decimal Price { get; set; }
+        [Display(Name = "Redni broj")]
+        public int OrderNo { get; set; }
 
 		[Required]
-		public int PriceListId { get; set; }
+        [Display(Name = "Cenovnik")]
+        public int PriceListId { get; set; }
 		public PriceList PriceList { get; set; }
 
 		[Required]
-		public int ProductId { get; set; }
+        [Display(Name = "Proizvod")]
+        public int ProductId { get; set; }
 		public Product Product { get; set; }
 	}
 }

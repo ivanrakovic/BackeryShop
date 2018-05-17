@@ -10,7 +10,8 @@ namespace BackeryShopDomain.Classes
 
 		[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
 		[Index("IX_PriceListName", IsUnique = true)]
-		public string Name { get; set; }
+        [Display(Name = "Naziv cenovnika")]
+        public string Name { get; set; }
 
 		public ICollection<PriceListDetail> PriceListDetail { get; set; }
 		public ICollection<Backery> Backery { get; set; }

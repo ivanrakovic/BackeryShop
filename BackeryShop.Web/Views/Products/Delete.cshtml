@@ -6,9 +6,9 @@
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Da li želite da obrišete?</h3>
 <div>
-    <h4>Product</h4>
+    <h4>Proizvod @Html.DisplayFor(model => model.Name)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -33,7 +33,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Brisanje" class="btn btn-default" /> |
             @Html.ActionLink("Nazad na listu", "Index")
         </div>
     }

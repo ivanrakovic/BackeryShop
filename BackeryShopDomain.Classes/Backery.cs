@@ -10,15 +10,18 @@ namespace BackeryShopDomain.Classes
 
 		[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
 		[Index("IX_BakeryName", IsUnique = true)]
-		public string Name { get; set; }
+        [Display(Name = "Naziv pekare")]
+        public string Name { get; set; }
 
 		[Range(1,3)]
-		public int NumberOfShifts { get; set; }
+        [Display(Name = "Broj smena")]
+        public int NumberOfShifts { get; set; }
 		
 		public PriceList PriceList { get; set; }
 
 		[Required]
-		public int PriceListId { get; set; }
+        [Display(Name = "Cenovnik")]
+        public int PriceListId { get; set; }
 
 	    public ICollection<Turnover> Turnover { get; set; }
     }
