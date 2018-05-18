@@ -53,9 +53,11 @@ Backery.turnover = (function ($) {
             success: function (data) {
                 var m = $('#pricelistdet');
                 if (data.success == true) {
-                    m.modal('hide');
+                    
                     $("a[data-pricelist-details='" + priceListId + "']").click();
-                    //location.reload(false);
+                    m.modal('hide');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
                 } else {
                     m.find('#pricelist-container').html(data);
                 }
