@@ -26,7 +26,7 @@
             </td>
             <td>
                 @Html.ActionLink("Izmenite", "Edit", new { id = item.Id }) |
-                <a href="/PriceLists/Details/@item.Id" class="js-pricelist-details" data-pricelist-details="@item.Id">Detalji</a> |
+                <a href="#" class="js-master" data-details-pricelistdetails="@item.Id" data-id="@item.Id" data-route="pricelists" data-action="Details">Detalji</a> |
                 @Html.ActionLink("Brisanje", "Delete", new { id = item.Id })
             </td>
         </tr>
@@ -34,7 +34,7 @@
 
 </table>
 
-<div id="pricelistdetail">
+<div class ="js-detail-data">
 </div>
 
 @section Scripts {

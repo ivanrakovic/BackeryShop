@@ -8,7 +8,8 @@
 <h2>Detalji cenovnika</h2>
 
 <p>
-    @Html.ActionLink("Dodajte nov proizvod", "Create", "PriceListDetails", new { id = @Model?.First().PriceListId }, null)
+    <a class="js-detail" href="#" data-id="0" data-route="pricelistdetails" data-action="Create">Dodajte novi proizvod</a>
+ 
 </p>
 <table class="table">
     <tr>
@@ -43,9 +44,8 @@
                 @Html.DisplayFor(modelItem => item.OrderNo)
             </td>
             <td>
-                <a class="js-edit-pricelist-detail" href="#" data-id="@item.Id">Izmenite</a> |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <a class="js-detail" href="#" data-id="@item.Id" data-route="pricelistdetails" data-action="Edit">Izmenite</a> |                
+                <a class="js-detail" href="#" data-id="@item.Id" data-route="pricelistdetails" data-action="Delete">Brisanje</a>
             </td>
         </tr>
     }
@@ -54,20 +54,20 @@
 
 
 
-<div class="modal fade " role="dialog" id="pricelistdet">
+<div class="modal fade " role="dialog" id="pricelistdetails">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Cenovnik</h4>
             </div>
             <div class="modal-body">
-                <div id="pricelist-container"></div>
+                <div id="pricelistdetails-container"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Odustani</button>
             </div>
         </div>
     </div>

@@ -1,14 +1,13 @@
 ﻿@model BackeryShopDomain.Classes.PriceListDetail
 
 @{
-    ViewBag.Title = "Delete";
+    Layout = null;
+    ViewBag.Title = "Brisanje";
 }
 
-<h2>Delete</h2>
-
-<h3>Da li želite da obrišete?</h3>
+<h3>Brisanje proizvoda iz cenovnika</h3>
 <div>
-    <h4>PriceListDetail</h4>
+    <h4>Da li želite da obrišete? </h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -42,15 +41,13 @@
         <dd>
             @Html.DisplayFor(model => model.OrderNo)
         </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Nazad na listu", "Index")
+            <input type="button" value="Brisanje" class="btn btn-danger" />       
         </div>
     }
 </div>

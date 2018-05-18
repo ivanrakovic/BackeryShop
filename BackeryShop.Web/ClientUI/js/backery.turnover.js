@@ -21,45 +21,68 @@ Backery.turnover = (function ($) {
         allowMinus: false
     });
 
-    $('.js-pricelist-details').click(function () {
-        $('#pricelistdetail').load(this.href);
-        return false;
-    });
-
-    $(document).on('click', '.js-edit-pricelist-detail', function (e) {
+    $('.js-master').click(function (e) {
         e.preventDefault();
-        var url = "/PriceListDetails/Edit"; 
-        var recId = $(this).attr('data-id');
+        var self = $(this);
+        var route = self.attr('data-route');
+        var action = self.attr('data-action');
+        var recId = self.attr('data-id');        
+        var url = route + "/" + action;
+
         $.ajax({
             url: url,
             type: 'GET',
             data: { id: recId },
             success: function (data) {
-                var m = $('#pricelistdet');
-                m.find('#pricelist-container').html(data);
+                var m = $('.js-detail-data');
+                m.html(data);
+            }
+        });
+        return false;
+    });
+
+    $(document).on('click', '.js-detail', function (e) {
+        e.preventDefault();
+        var self = $(this);
+        var route = self.attr('data-route');
+        var action = self.attr('data-action');
+        var recId = self.attr('data-id');  
+        var url = route + "/" + action; 
+        
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: { id: recId },
+            success: function (data) {
+                var m = $('#' + route);
+                m.find('#'+route+'-container').html(data);
                 m.modal('show');
             }
         });
     });
 
-    $(document).on('click', '.btn-default-edit-pricelist-detail', function (e) {
+    $(document).on('click', '.btn-default-detail', function (e) {
         e.preventDefault(); 
         var self = $(this);
-        var priceListId = $('#PriceListId').val();
+        var action = self.attr('data-action');
+        var route = self.attr('data-route');
+
+        var url = route + "/" + action; 
+        var masterId = $('#PriceListId').val();
         $.ajax({
-            url: '/PriceListDetails/Edit',
+            url: url,
             type: 'POST',
             data: self.closest('form').serialize(),
             success: function (data) {
-                var m = $('#pricelistdet');
+                var m = $('#' + route);
                 if (data.success == true) {
                     
-                    $("a[data-pricelist-details='" + priceListId + "']").click();
+                    $("a[data-details-" + route+"='" + priceListId + "']").click();
                     m.modal('hide');
                     $('body').removeClass('modal-open');
                     $('.modal-backdrop').remove();
                 } else {
-                    m.find('#pricelist-container').html(data);
+                    m.find('#' + route+'-container').html(data);
                 }
             }
         });

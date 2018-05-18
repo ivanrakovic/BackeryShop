@@ -33,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PriceListId, "PriceListId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("PriceListId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("PriceListId", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
                 @Html.ValidationMessageFor(model => model.PriceListId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -41,22 +41,19 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductId, "ProductId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ProductId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ProductId", null, htmlAttributes: new { @class = "form-control" , disabled = "disabled" })
                 @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="button" value="Save" class="btn btn-default btn-default-edit-pricelist-detail" />
+                <input type="button" value="Snimite" class="btn btn-default btn-default-detail" data-route="pricelistdetails" data-action="Edit" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Nazad na listu", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
