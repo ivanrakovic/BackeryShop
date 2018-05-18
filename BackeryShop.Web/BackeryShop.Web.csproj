@@ -297,7 +297,6 @@
     <Content Include="Views\TurnoverDetails\Edit.cshtml" />
     <Content Include="Views\TurnoverDetails\Index.cshtml" />
     <Content Include="Views\TurnoverData\Create.cshtml" />
-    <Content Include="Views\Shared\_PriceListDetailCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
