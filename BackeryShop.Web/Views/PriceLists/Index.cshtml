@@ -26,7 +26,7 @@
             </td>
             <td>
                 @Html.ActionLink("Izmenite", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detalji", "Details", new { id = item.Id }, new { @class = "js-pricelist-details" }) |
+                <a href="/PriceLists/Details/@item.Id" class="js-pricelist-details" data-pricelist-details="@item.Id">Detalji</a> |
                 @Html.ActionLink("Brisanje", "Delete", new { id = item.Id })
             </td>
         </tr>

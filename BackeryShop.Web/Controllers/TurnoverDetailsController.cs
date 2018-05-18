@@ -56,7 +56,7 @@ namespace BackeryShop.Web.Controllers
             {
                 db.TurnoverDetails.Add(turnoverDetail);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
 
             ViewBag.ProductId = new SelectList(db.Products, "Id", "Name", turnoverDetail.ProductId);

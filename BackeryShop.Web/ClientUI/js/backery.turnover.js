@@ -26,8 +26,42 @@ Backery.turnover = (function ($) {
         return false;
     });
 
+    $(document).on('click', '.js-edit-pricelist-detail', function (e) {
+        e.preventDefault();
+        var url = "/PriceListDetails/Edit"; 
+        var recId = $(this).attr('data-id');
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: { id: recId },
+            success: function (data) {
+                var m = $('#pricelistdet');
+                m.find('#pricelist-container').html(data);
+                m.modal('show');
+            }
+        });
+    });
 
-
+    $(document).on('click', '.btn-default-edit-pricelist-detail', function (e) {
+        e.preventDefault(); 
+        var self = $(this);
+        var priceListId = $('#PriceListId').val();
+        $.ajax({
+            url: '/PriceListDetails/Edit',
+            type: 'POST',
+            data: self.closest('form').serialize(),
+            success: function (data) {
+                var m = $('#pricelistdet');
+                if (data.success == true) {
+                    m.modal('hide');
+                    $("a[data-pricelist-details='" + priceListId + "']").click();
+                    //location.reload(false);
+                } else {
+                    m.find('#pricelist-container').html(data);
+                }
+            }
+        });
+    });
 
     return me;
 }(jQuery));

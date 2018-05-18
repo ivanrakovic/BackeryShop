@@ -66,7 +66,7 @@ namespace BackeryShop.Web.Controllers
             {
                 db.PriceListDetails.Add(priceListDetail);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
 
             ViewBag.PriceListId = new SelectList(db.PriceLists, "Id", "Name", priceListDetail.PriceListId);
@@ -102,7 +102,7 @@ namespace BackeryShop.Web.Controllers
             {
                 db.Entry(priceListDetail).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
             ViewBag.PriceListId = new SelectList(db.PriceLists, "Id", "Name", priceListDetail.PriceListId);
             ViewBag.ProductId = new SelectList(db.Products, "Id", "Name", priceListDetail.ProductId);
