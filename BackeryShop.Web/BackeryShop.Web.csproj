@@ -199,6 +199,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\HomeViewModel.cs" />
     <Compile Include="Models\ViewModels\PriceListDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\TurnoverProductViewModel.cs" />
     <Compile Include="Models\ViewModels\TurnoverViewModel.cs" />
@@ -279,9 +280,7 @@
     <Content Include="Views\PriceLists\Index.cshtml" />
     <Content Include="Views\PriceListDetails\Create.cshtml" />
     <Content Include="Views\PriceListDetails\Delete.cshtml" />
-    <Content Include="Views\PriceListDetails\Details.cshtml" />
     <Content Include="Views\PriceListDetails\Edit.cshtml" />
-    <Content Include="Views\PriceListDetails\Index.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
