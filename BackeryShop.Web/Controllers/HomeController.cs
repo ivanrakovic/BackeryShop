@@ -1,16 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BackeryShop.Web.Models.ViewModels;
+using BackeryShopDomain.DataModel;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BackeryShop.Web.Controllers
 {
-	public class HomeController : Controller
+    public class HomeController : Controller
 	{
 		public ActionResult Index()
 		{
-			return View();
+
+            var model = new HomeViewModel();
+            using (var db = new BackeryContext())
+            {
+                model.BackeriesList = db.Backeries.ToList();
+            }
+                return View(model);
 		}
 
 		public ActionResult About()
