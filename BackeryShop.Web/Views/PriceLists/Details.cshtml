@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BackeryShopDomain.Classes.PriceListDetail>
+﻿@model BackeryShop.Web.Models.ViewModels.PriceListDetailViewModel
 @{
 
 
@@ -8,27 +8,27 @@
 <h2>Detalji cenovnika</h2>
 
 <p>
-    <a class="js-detail" href="#" data-id="0" data-route="pricelistdetails" data-action="Create">Dodajte novi proizvod</a>
+    <a class="js-detail" href="#" data-id="@Model.MasterId" data-route="pricelistdetails" data-action="Create">Dodajte novi proizvod</a>
  
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PriceList.Name)
+            @Html.DisplayNameFor(model => model.PriceListDetailItems.FirstOrDefault().PriceList.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.Name)
+            @Html.DisplayNameFor(model => model.PriceListDetailItems.FirstOrDefault().Product.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.PriceListDetailItems.FirstOrDefault().Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrderNo)
+            @Html.DisplayNameFor(model => model.PriceListDetailItems.FirstOrDefault().OrderNo)
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.PriceListDetailItems)
     {
         <tr>
             <td>
@@ -44,8 +44,8 @@
                 @Html.DisplayFor(modelItem => item.OrderNo)
             </td>
             <td>
-                <a class="js-detail" href="#" data-id="@item.Id" data-route="pricelistdetails" data-action="Edit">Izmenite</a> |                
-                <a class="js-detail" href="#" data-id="@item.Id" data-route="pricelistdetails" data-action="Delete">Brisanje</a>
+                <a class="js-detail" href="#" data-master-id="@item.PriceListId" data-id="@item.Id" data-route="pricelistdetails" data-action="Edit">Izmenite</a> |                
+                <a class="js-detail" href="#" data-master-id="@item.PriceListId" data-id="@item.Id" data-route="pricelistdetails" data-action="Delete">Brisanje</a>
             </td>
         </tr>
     }

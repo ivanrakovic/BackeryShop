@@ -48,8 +48,12 @@ namespace BackeryShop.Web.Controllers
 
         public ActionResult Create(int? id)
         {
-            
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             ViewBag.PriceListId = new SelectList(db.PriceLists.Where(p => p.Id == id), "Id", "Name", id);
+            ViewBag.MasterId = id ?? 0;
             var productsForList = db.Products.Where(p => !db.PriceListDetails.Where(x => x.PriceListId == id).Any(p2 => p2.ProductId == p.Id));
             ViewBag.ProductId = new SelectList(productsForList, "Id", "Name");
             return View();
@@ -132,7 +136,7 @@ namespace BackeryShop.Web.Controllers
             var priceListDetail = db.PriceListDetails.Find(id);
             db.PriceListDetails.Remove(priceListDetail);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)

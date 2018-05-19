@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using BackeryShop.Web.Models.ViewModels;
 using BackeryShopDomain.Classes;
 using BackeryShopDomain.DataModel;
 
@@ -28,10 +29,17 @@ namespace BackeryShop.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var model = new PriceListDetailViewModel
+            {
+                MasterId = id ?? 0,
+                PriceListDetailItems = db.PriceListDetails.Where(x => x.PriceListId == id).Include(p => p.PriceList).Include(p => p.Product).ToList()
 
-            var priceListDetails = db.PriceListDetails.Where(x=> x.PriceListId == id).Include(p => p.PriceList).Include(p => p.Product);
- 
-            return PartialView(priceListDetails.ToList());
+            };
+
+
+            //var priceListDetails = db.PriceListDetails.Where(x=> x.PriceListId == id).Include(p => p.PriceList).Include(p => p.Product);
+
+            return PartialView(model);
         }
 
         // GET: PriceLists/Create
@@ -65,6 +73,7 @@ namespace BackeryShop.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var priceList = db.PriceLists.Find(id);
+
             if (priceList == null)
             {
                 return HttpNotFound();

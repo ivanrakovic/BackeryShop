@@ -43,11 +43,12 @@
         </dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
-
+        @Html.HiddenFor(model => model.Id)
         <div class="form-actions no-color">
-            <input type="button" value="Brisanje" class="btn btn-danger" />       
+            <input type="button" value="Brisanje" class="btn btn-danger btn-default-detail" data-master-id="@Model.PriceListId" data-route="pricelistdetails" data-action="Delete" />
         </div>
     }
 </div>

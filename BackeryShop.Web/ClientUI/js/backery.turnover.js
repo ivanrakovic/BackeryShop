@@ -66,18 +66,18 @@ Backery.turnover = (function ($) {
         var self = $(this);
         var action = self.attr('data-action');
         var route = self.attr('data-route');
+        var masterId = self.attr('data-master-id');
 
         var url = route + "/" + action; 
-        var masterId = $('#PriceListId').val();
+        
         $.ajax({
             url: url,
             type: 'POST',
             data: self.closest('form').serialize(),
             success: function (data) {
                 var m = $('#' + route);
-                if (data.success == true) {
-                    
-                    $("a[data-details-" + route+"='" + priceListId + "']").click();
+                if (data.success === true) {
+                    $(".js-master[data-id='" + masterId + "']").click();
                     m.modal('hide');
                     $('body').removeClass('modal-open');
                     $('.modal-backdrop').remove();
