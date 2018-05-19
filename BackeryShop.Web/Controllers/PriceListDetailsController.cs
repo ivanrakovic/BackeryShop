@@ -38,14 +38,6 @@ namespace BackeryShop.Web.Controllers
             return View(priceListDetail);
         }
 
-        // GET: PriceListDetails/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.PriceListId = new SelectList(db.PriceLists, "Id", "Name");
-        //    ViewBag.ProductId = new SelectList(db.Products, "Id", "Name");
-        //    return View();
-        //}
-
         public ActionResult Create(int? id)
         {
             if (id == null)
@@ -72,9 +64,11 @@ namespace BackeryShop.Web.Controllers
                 db.SaveChanges();
                 return Json(new { success = true });
             }
-
-            ViewBag.PriceListId = new SelectList(db.PriceLists, "Id", "Name", priceListDetail.PriceListId);
-            ViewBag.ProductId = new SelectList(db.Products, "Id", "Name", priceListDetail.ProductId);
+            var id = priceListDetail.PriceListId;
+            ViewBag.PriceListId = new SelectList(db.PriceLists.Where(p => p.Id == id), "Id", "Name", id);
+            ViewBag.MasterId = id;
+            var productsForList = db.Products.Where(p => !db.PriceListDetails.Where(x => x.PriceListId == id).Any(p2 => p2.ProductId == p.Id));
+            ViewBag.ProductId = new SelectList(productsForList, "Id", "Name");
             return View(priceListDetail);
         }
 
