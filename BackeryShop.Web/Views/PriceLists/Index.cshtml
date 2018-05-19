@@ -10,8 +10,8 @@
 <p>
     @Html.ActionLink("Dodajte novi", "Create")
 </p>
-<table class="table">
-    <tr>
+<table class="table table-responsive table-hover">
+    <tr class="warning">
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -20,7 +20,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="info">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>

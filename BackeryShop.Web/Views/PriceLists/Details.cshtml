@@ -5,14 +5,15 @@
     ViewBag.Title = "Detalji cenovnika";
 }
 
-<h2>Detalji cenovnika</h2>
+<hr/>
 
+<h4>Detalji cenovnika</h4>
 <p>
     <a class="js-detail" href="#" data-id="@Model.MasterId" data-route="pricelistdetails" data-action="Create">Dodajte novi proizvod</a>
  
 </p>
-<table class="table">
-    <tr>
+<table class="table table-responsive table-hover">
+    <tr class="warning">
         <th>
             @Html.DisplayNameFor(model => model.PriceListDetailItems.FirstOrDefault().PriceList.Name)
         </th>
