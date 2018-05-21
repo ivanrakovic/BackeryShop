@@ -32,12 +32,9 @@ namespace BackeryShop.Web.Controllers
             var model = new PriceListDetailViewModel
             {
                 MasterId = id ?? 0,
-                PriceListDetailItems = db.PriceListDetails.Where(x => x.PriceListId == id).Include(p => p.PriceList).Include(p => p.Product).ToList()
-
+                PriceListName = db.PriceLists.Find(id)?.Name,
+                PriceListDetailItems = db.PriceListDetails.Where(x => x.PriceListId == id).Include(p => p.PriceList).Include(p => p.Product).OrderBy(o => o.OrderNo).ToList()
             };
-
-
-            //var priceListDetails = db.PriceListDetails.Where(x=> x.PriceListId == id).Include(p => p.PriceList).Include(p => p.Product);
 
             return PartialView(model);
         }
@@ -118,7 +115,9 @@ namespace BackeryShop.Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             var priceList = db.PriceLists.Find(id);
+            db.PriceListDetails.RemoveRange(db.PriceListDetails.Where(x => x.PriceListId == id));
             db.PriceLists.Remove(priceList);
+            
             db.SaveChanges();
             return RedirectToAction("Index");
         }

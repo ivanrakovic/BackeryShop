@@ -9,7 +9,7 @@ namespace BackeryShopDomain.Classes
 		[Range(0, 1000000)]
         [Display(Name = "Cena")]
         public decimal Price { get; set; }
-        [Display(Name = "Redni broj")]
+        [Display(Name = "Rb.")]
         public int OrderNo { get; set; }
 
 		[Required]
