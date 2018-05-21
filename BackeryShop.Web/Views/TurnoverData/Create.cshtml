@@ -6,87 +6,116 @@
 }
 <h2>Unos za @Model.Backery.Name</h2>
 
+@using (Html.BeginForm())
+{
 
-<div class="row">
-    <div class="col-md-3">
-        <div class="form-group">
-            <div class="col-md-10">
-                <div id="turnover-date-input" data-date="@Model.Date.ToString("dd/MM/yyyy")"></div>
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div id="turnover-date-input" data-date="@Model.Date.ToString("dd/MM/yyyy")"></div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                @for (int j = 1; j <= Model.Backery.NumberOfShifts; j++)
-                {
-                    <div class="radio">
-                        <label><input type="radio" name="shiftgrp" value="@j" @(j == Model.Shift ? "checked" : string.Empty)>
-                            Smena @j</label>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-    <div class="col-md-9">
-        <div class="table-responsive">
-            <table class="table table-condensed table-striped table-bordered table-hover no-margin">
-                <thead>
-                    <tr>
-                        <th class="col-md-1">
-                            Id
-                        </th>
-                        <th class="col-md-2">Naziv proizvoda</th>
-                        <th class="col-md-1">Cena</th>
-                        <th class="col-md-1">Staro Stanje</th>
-                        <th class="col-md-1">Novo Stanje</th>
-                        <th class="col-md-1">Došlo</th>
-                        <th class="col-md-1">Škart</th>
-                        <th class="col-md-1">Prodato</th>
-                        <th class="col-md-1">Ukupno</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{ var i = 1; }
-                    @foreach (var item in Model.TurnoverProductsViewModels)
+            <div class="form-group">
+                <div class="col-md-10">
+                    @for (int j = 1; j <= Model.Backery.NumberOfShifts; j++)
                     {
-
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ProdtId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DisplayName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Price)
-                            </td>
-                            <td class="hidden-phone">
-                                <input class="form-control js-decimal" type="text" id="PreviousBalance_@i" readonly value="@item.Balance"/>
-                            </td>
-                            <td class="hidden-phone">
-                                <input class="form-control js-decimal" type="text" id="NewBalance_@i" value="0"/>
-                            </td>
-                            <td class="hidden-phone">
-                                <input class="form-control js-decimal" type="text" id="BakedNew_@i" value="0"/>
-                            </td>
-                            <td>
-                                <input class="form-control js-decimal" type="text" id="Scrap_@i" value="0"/>
-                            </td>
-                            <td>
-                                <input class="form-control js-decimal" type="text" id="Sold_@i" value="0"/>
-                            </td>
-                            <td>
-                                <input class="form-control js-decimal" type="text" id="Total_@i" readonly value="0"/>
-                            </td>
-                        </tr>
-                        i = i + 1;
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="shiftgrp" value="@j" @(j == Model.Shift ? "checked" : string.Empty)>
+                                Smena @j
+                            </label>
+                        </div>
                     }
-                </tbody>
-            </table>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <dl>
+                        <dt>
+                            Ukupno
+                        </dt>
+
+                        <dd id="totalsum">
+                            10000
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a class="btn btn-success" href="#">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Snimi
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <div class="table-responsive">
+                <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">
+                                Prod Id
+                            </th>
+                            <th class="col-md-2">Naziv</th>
+                            <th class="col-md-1">Cena</th>
+                            <th class="col-md-1">Staro Stanje</th>
+                            <th class="col-md-1">Novo Stanje</th>
+                            <th class="col-md-1">Došlo</th>
+                            <th class="col-md-1">Škart</th>
+                            <th class="col-md-1">Prodato</th>
+                            <th class="col-md-1">Ukupno</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ var i = 1; }
+                        @foreach (var item in Model.TurnoverProductsViewModels)
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProdtId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DisplayName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td class="hidden-phone">
+                                    <input class="form-control js-decimal" type="text" id="PreviousBalance_@i" readonly value="@item.Balance" />
+                                </td>
+                                <td class="hidden-phone">
+                                    <input class="form-control js-decimal" type="text" id="NewBalance_@i" value="0" />
+                                </td>
+                                <td class="hidden-phone">
+                                    <input class="form-control js-decimal" type="text" id="BakedNew_@i" value="0" />
+                                </td>
+                                <td>
+                                    <input class="form-control js-decimal" type="text" id="Scrap_@i" value="0" />
+                                </td>
+                                <td>
+                                    <input class="form-control js-decimal" type="text" id="Sold_@i" value="0" />
+                                </td>
+                                <td>
+                                    <input class="form-control js-decimal" type="text" id="Total_@i" readonly value="0" />
+                                </td>
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-
+}
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />

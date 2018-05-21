@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackeryShopDomain.DataModel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackeryShop.Web", "BackeryShop.Web\BackeryShop.Web.csproj", "{ED906EEF-E896-44C7-87B9-F683A2314234}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackeryShopDomain.Data", "BackeryShopDomain.Data\BackeryShopDomain.Data.csproj", "{D264BCC2-C04A-4C59-A1DD-A671FEE32412}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{ED906EEF-E896-44C7-87B9-F683A2314234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED906EEF-E896-44C7-87B9-F683A2314234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED906EEF-E896-44C7-87B9-F683A2314234}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D264BCC2-C04A-4C59-A1DD-A671FEE32412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D264BCC2-C04A-4C59-A1DD-A671FEE32412}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D264BCC2-C04A-4C59-A1DD-A671FEE32412}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D264BCC2-C04A-4C59-A1DD-A671FEE32412}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

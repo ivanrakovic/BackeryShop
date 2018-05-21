@@ -1,9 +1,12 @@
 ﻿using System.Linq;
+using System.Net.Http;
 using System.Web.Mvc;
 using BackeryShop.Web.Models.ViewModels;
 using BackeryShop.Web.Services;
 using BackeryShopDomain.Classes;
+using BackeryShopDomain.Classes.Entities;
 using BackeryShopDomain.DataModel;
+using Microsoft.SqlServer.Server;
 
 namespace BackeryShop.Web.Controllers
 {
@@ -28,6 +31,19 @@ namespace BackeryShop.Web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(TurnoverDto data)
+        {
+            if (ModelState.IsValid)
+            {
+               
+                return RedirectToAction("Index", "Home");
+            }
+
+            var model = new TurnoverViewModel();
+            return View(model);
+        }
 
     }
 }
