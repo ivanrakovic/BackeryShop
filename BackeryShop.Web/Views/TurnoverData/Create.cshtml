@@ -48,7 +48,7 @@
             
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <a class="btn btn-success" href="#">
+                    <a class="btn btn-success js-turnover-submit" href="#">
                         <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Snimi
                     </a>
                 </div>
@@ -78,7 +78,7 @@
                         @foreach (var item in Model.TurnoverProductsViewModels)
                         {
 
-                            <tr>
+                            <tr class="js-turnover-detail" data-row-id="@i">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.ProdtId)
                                 </td>

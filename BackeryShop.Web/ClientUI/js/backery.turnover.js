@@ -41,6 +41,38 @@ Backery.turnover = (function ($) {
         return false;
     });
 
+
+    $('.js-turnover-submit').click(function (e) {
+        e.preventDefault();
+        var self = $(this);
+        var selDdate = $('#turnover-date-input').datepicker('getDate');
+        var shift = $("input:radio[name='shiftgrp']:checked").val();
+        var data = {
+            Date: selDdate.toDateString(),
+            ShiftNo: shift,
+            BackeryId: "1"
+        }
+        var rows = [];
+        $('tr.js-turnover-detail').each(function(e) {
+            $(this).children('td > input').each(function(evn) {
+                
+            });
+        });
+        $.ajax({
+            url: "/TurnoverData/InsertTurnover",
+            type: 'POST',
+            data: JSON.stringify(data) ,
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+               
+               
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+        return false;
+    });
     $(document).on('click', '.js-detail', function (e) {
         e.preventDefault();
         var self = $(this);

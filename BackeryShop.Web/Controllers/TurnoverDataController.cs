@@ -32,9 +32,10 @@ namespace BackeryShop.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(TurnoverDto data)
+        //[ValidateAntiForgeryToken]
+        public ActionResult InsertTurnover(TurnoverDto turnover)
         {
+            
             if (ModelState.IsValid)
             {
                
@@ -42,7 +43,7 @@ namespace BackeryShop.Web.Controllers
             }
 
             var model = new TurnoverViewModel();
-            return View(model);
+            return View("Create",model);
         }
 
     }
