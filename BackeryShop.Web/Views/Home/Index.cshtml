@@ -16,9 +16,10 @@
         <div class="col-md-4">
             <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
             <p>
-                @Html.ActionLink("Novi unos za pekaru "+ @item.Name, "Create", "TurnoverData", new { id = item.Id }, null)
+                <a href="@Url.Action("Create", "TurnoverData", new { id = item.Id })" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novi unos prometa &raquo;
+                </a>
             </p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
         </div>
     }
 
