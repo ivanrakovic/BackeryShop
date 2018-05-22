@@ -71,8 +71,9 @@ Backery.turnover = (function ($) {
             data: JSON.stringify(data) ,
             contentType: 'application/json; charset=utf-8',
             success: function (response) {
-               
-               
+                if (response.success)
+                    window.location.replace('/');
+
             },
             error: function () {
                 alert("error");

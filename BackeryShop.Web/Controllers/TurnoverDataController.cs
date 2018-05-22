@@ -40,7 +40,7 @@ namespace BackeryShop.Web.Controllers
             if (ModelState.IsValid)
             {
                 var i = TrunoverRepository.SaveTurnoverData(turnover);
-                return RedirectToAction("Index", "Home");
+                return Json(new {success = true});
             }
 
             var model = new TurnoverViewModel();
