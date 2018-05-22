@@ -7,6 +7,7 @@ using BackeryShopDomain.Classes;
 using BackeryShopDomain.Classes.Entities;
 using BackeryShopDomain.DataModel;
 using Microsoft.SqlServer.Server;
+using BackeryShopDomain.DataModel.Repositories;
 
 namespace BackeryShop.Web.Controllers
 {
@@ -38,7 +39,7 @@ namespace BackeryShop.Web.Controllers
             
             if (ModelState.IsValid)
             {
-               
+                var i = TrunoverRepository.SaveTurnoverData(turnover);
                 return RedirectToAction("Index", "Home");
             }
 

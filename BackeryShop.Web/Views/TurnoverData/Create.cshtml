@@ -89,7 +89,7 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Price)
-                                    @Html.HiddenFor(modelItem => item.Price)
+                                    @Html.HiddenFor(modelItem => item.Price, new { id = "Price" })
                                 </td>
                                 <td class="hidden-phone">
                                     <input class="form-control js-decimal" type="text" id="PreviousBalance_@i" readonly value="@item.Balance" />
