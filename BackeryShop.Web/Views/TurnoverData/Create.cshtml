@@ -10,7 +10,7 @@
 {
 
     @Html.AntiForgeryToken()
-
+     @Html.HiddenFor(m => m.Backery.Id, new { id = "BackeryId"})
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">

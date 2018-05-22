@@ -47,10 +47,11 @@ Backery.turnover = (function ($) {
         var self = $(this);
         var selDdate = $('#turnover-date-input').datepicker('getDate');
         var shift = $("input:radio[name='shiftgrp']:checked").val();
+        var bakeryId = $('#BackeryId').val();
         var data = {
             Date: selDdate.toDateString(),
             ShiftNo: shift,
-            BackeryId: "1"
+            BackeryId: bakeryId
         }
         var rows = [];
         $('tr.js-turnover-detail').each(function (e) {
