@@ -53,11 +53,17 @@ Backery.turnover = (function ($) {
             BackeryId: "1"
         }
         var rows = [];
-        $('tr.js-turnover-detail').each(function(e) {
-            $(this).children('td > input').each(function(evn) {
-                
+        $('tr.js-turnover-detail').each(function (e) {
+            var tr = $(this);
+            var o = {};
+            tr.find('input').each(function(evn) {
+                var inpt = $(this);
+                o[inpt[0].id.split('_')[0]] = inpt.val();
             });
+            rows.push(o);
         });
+
+        data["TurnoverDetails"] = rows;
         $.ajax({
             url: "/TurnoverData/InsertTurnover",
             type: 'POST',
