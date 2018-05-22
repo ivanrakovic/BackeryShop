@@ -7,7 +7,7 @@ using BackeryShopDomain.Classes.Entities;
 
 namespace BackeryShopDomain.DataModel.Repositories
 {
-    public static class TrunoverRepository
+    public static class TurnoverRepository
     {
         public static int SaveTurnoverData(TurnoverDto dataDto)
         {
@@ -50,6 +50,34 @@ namespace BackeryShopDomain.DataModel.Repositories
 
             }
             return result;
+        }
+
+        public static int GetLastTurnoverId(Backery backery)
+        {
+            var id = 0;
+            using (var db = new BackeryContext())
+            {
+                var t = db.Turnovers.Where(x => x.BackeryId == backery.Id);
+                if (t.Any())
+                {
+                    id = t.Max(i => i.Id);
+                }
+                return id;
+            };
+        }
+
+        public static int GetTurnoverIdFromDataAndShift(Backery backery, DateTime date, int shift)
+        {
+            var id = 0;
+            using (var db = new BackeryContext())
+            {
+                var t = db.Turnovers.Where(x => x.Date == date && x.BackeryId == backery.Id && x.ShiftNo == shift);
+                if (t.Any())
+                {
+                    id = t.Max(i => i.Id);
+                }
+                return id;
+            };
         }
     }
 }

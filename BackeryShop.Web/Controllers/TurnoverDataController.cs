@@ -39,7 +39,7 @@ namespace BackeryShop.Web.Controllers
             
             if (ModelState.IsValid)
             {
-                var i = TrunoverRepository.SaveTurnoverData(turnover);
+                var i = TurnoverRepository.SaveTurnoverData(turnover);
                 return Json(new {success = true});
             }
 

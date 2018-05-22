@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc.Html;
+using BackeryShopDomain.DataModel.Repositories;
 
 namespace BackeryShop.Web.Services
 {
@@ -14,7 +15,7 @@ namespace BackeryShop.Web.Services
         public static List<TurnoverProductViewModel> GetDataForNewTurnover(Backery backery)
         {
             var result = new List<TurnoverProductViewModel>();
-            var lastId = GetLastTurnoverId(backery);
+            var lastId = TurnoverRepository.GetLastTurnoverId(backery);
             using (var db = new BackeryContext())
             {
                 result = (from b in db.Backeries
@@ -89,23 +90,11 @@ namespace BackeryShop.Web.Services
 
         public static Turnover GetNextTurnoverDataForBakery(Backery backery)
         {
-            var lastId = GetLastTurnoverId(backery);
+            var lastId = TurnoverRepository.GetLastTurnoverId(backery);
             return GetNextTurnoverDataFromTurnoverId(backery, lastId);
         }
 
-        private static int GetLastTurnoverId(Backery backery)
-        {
-            var id = 0;
-            using (var db = new BackeryContext())
-            {
-                var t = db.Turnovers.Where(x => x.BackeryId == backery.Id);
-                if (t.Any())
-                {
-                    id = t.Max(i => i.Id);
-                }
-                return id;
-            };
-        }
+
 
         public static Turnover GetNextTurnoverDataFromTurnoverId(Backery backery, int turnoverId)
         {
@@ -141,20 +130,6 @@ namespace BackeryShop.Web.Services
                 result.Date = (turnData.ShiftNo == 1) ? turnData.Date.AddDays(-1) : turnData.Date;
                 return result;
             }
-        }
-
-        private static int GetTurnoverIdFromDataAndShift(Backery backery, DateTime date, int shift)
-        {
-            var id = 0;
-            using (var db = new BackeryContext())
-            {
-                var t = db.Turnovers.Where(x => x.Date == date && x.BackeryId == backery.Id && x.ShiftNo == shift);
-                if (t.Any())
-                {
-                    id = t.Max(i => i.Id);
-                }
-                return id;
-            };
         }
     }
 }
