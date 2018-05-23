@@ -40,11 +40,18 @@ namespace BackeryShop.Web.Services
                     if (oldBal.Any())
                     {
                         item.Balance = oldBal.First().Balance;
-                    }                    
+                    }
                 }
             }
             return result;
         }
+
+        public static List<TurnoverProductViewModel> GetDataForTurnover(int backeryId, DateTime date, int shiftNo)
+        {
+            var result = new List<TurnoverProductViewModel>();
+            return result;
+        }
+
 
         public static List<TurnoverProductViewModel> GetDataForTurnover(Backery backery, DateTime date, int shift)
         {
@@ -52,20 +59,20 @@ namespace BackeryShop.Web.Services
             using (var db = new BackeryContext())
             {
                 result = (from b in db.Backeries
-                    join pl in db.PriceLists on b.PriceListId equals pl.Id
-                    join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
-                    join p in db.Products on pld.ProductId equals p.Id
-                    where b.Id == backery.Id
-                    orderby pld.OrderNo descending
-                    select new TurnoverProductViewModel
-                    {
-                        DisplayName = p.Name,
-                        ProdtId = p.Id,
-                        Price = pld.Price
-                    }).ToList();
+                          join pl in db.PriceLists on b.PriceListId equals pl.Id
+                          join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
+                          join p in db.Products on pld.ProductId equals p.Id
+                          where b.Id == backery.Id
+                          orderby pld.OrderNo descending
+                          select new TurnoverProductViewModel
+                          {
+                              DisplayName = p.Name,
+                              ProdtId = p.Id,
+                              Price = pld.Price
+                          }).ToList();
             }
 
-           // GetTurnoverIdFromDataAndShift
+            // GetTurnoverIdFromDataAndShift
 
             return result;
         }

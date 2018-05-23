@@ -9,6 +9,99 @@ namespace BackeryShopDomain.DataModel.Repositories
 {
     public static class TurnoverRepository
     {
+
+        public static List<TurnoverDetailDto> GetDataForNewTurnover(Backery backery)
+        {
+            var result = new List<TurnoverDetailDto>();
+            var lastId = TurnoverRepository.GetLastTurnoverId(backery);
+            using (var db = new BackeryContext())
+            {
+                result = (from b in db.Backeries
+                    join pl in db.PriceLists on b.PriceListId equals pl.Id
+                    join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
+                    join p in db.Products on pld.ProductId equals p.Id
+                    where b.Id == backery.Id
+                    orderby pld.OrderNo descending
+                    select new TurnoverDetailDto
+                    {
+                        ProductName = p.Name,
+                        ProductId = p.Id,
+                        Price = pld.Price
+                    }).ToList();
+            }
+            var oldBalances = GetBalancesForTurnoverId(backery.Id, lastId);
+            if (oldBalances.Any())
+            {
+                foreach (var item in result)
+                {
+                    var oldBal = oldBalances.Where(x => x.ProductId == item.ProductId).ToList();
+                    if (oldBal.Any())
+                    {
+                        item.PreviousBalance = oldBal.First().PreviousBalance;
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static List<TurnoverDetailDto> GetDataForNewTurnover(int backeryId, DateTime date, int shift)
+        {
+            var result = new List<TurnoverDetailDto>();
+            
+            using (var db = new BackeryContext())
+            {
+                result = (from b in db.Backeries
+                    join pl in db.PriceLists on b.PriceListId equals pl.Id
+                    join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
+                    join p in db.Products on pld.ProductId equals p.Id
+                    where b.Id == backeryId
+                          orderby pld.OrderNo descending
+                    select new TurnoverDetailDto
+                    {
+                        ProductName = p.Name,
+                        ProductId = p.Id,
+                        Price = pld.Price
+                    }).ToList();
+
+
+
+            }
+
+            var lastId = 0;
+            var oldBalances = GetBalancesForTurnoverId(backeryId, lastId);
+            if (oldBalances.Any())
+            {
+                foreach (var item in result)
+                {
+                    var oldBal = oldBalances.Where(x => x.ProductId == item.ProductId).ToList();
+                    if (oldBal.Any())
+                    {
+                        item.PreviousBalance = oldBal.First().PreviousBalance;
+                    }
+                }
+            }
+            return result;
+        }
+
+
+        public static List<TurnoverDetailDto> GetBalancesForTurnoverId(int backeryId, int turnoverId)
+        {
+            var result = new List<TurnoverDetailDto>();
+            using (var db = new BackeryContext())
+            {
+                result = (from td in db.Turnovers
+                        join tdd in db.TurnoverDetails on td.Id equals tdd.TurnoverId
+                        where td.BackeryId == backeryId && td.Id == turnoverId
+                        select new TurnoverDetailDto
+                        {
+                            ProductId = tdd.ProductId,
+                            PreviousBalance = tdd.PreviousBalance
+                        }
+                    ).ToList();
+            }
+            return result;
+        }
+
         public static int SaveTurnoverData(TurnoverDto dataDto)
         {
             var result = -1;
