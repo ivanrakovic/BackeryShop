@@ -80,19 +80,19 @@
 
                             <tr class="js-turnover-detail" data-row-id="@i">
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ProdtId)
-                                    @Html.HiddenFor(modelItem => item.ProdtId, new {id = "ProductId" })
+                                    @Html.DisplayFor(modelItem => item.ProductId)
+                                    @Html.HiddenFor(modelItem => item.ProductId, new {id = "ProductId" })
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.DisplayName)
-                                    @Html.HiddenFor(modelItem => item.DisplayName, new { id = "ProductName" }) 
+                                    @Html.DisplayFor(modelItem => item.ProductName)
+                                    @Html.HiddenFor(modelItem => item.ProductName, new { id = "ProductName" }) 
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Price)
                                     @Html.HiddenFor(modelItem => item.Price, new { id = "Price" })
                                 </td>
                                 <td class="hidden-phone">
-                                    <input class="form-control js-decimal" type="text" id="PreviousBalance_@i" readonly value="@item.Balance" />
+                                    <input class="form-control js-decimal" type="text" id="PreviousBalance_@i" readonly value="@item.PreviousBalance" />
                                 </td>
                                 <td class="hidden-phone">
                                     <input class="form-control js-decimal" type="text" id="NewBalance_@i" value="0" />

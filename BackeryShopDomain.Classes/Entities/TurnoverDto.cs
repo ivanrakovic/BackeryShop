@@ -15,6 +15,7 @@ namespace BackeryShopDomain.Classes.Entities
         public int ShiftNo { get; set; }
         [Display(Name = "Pekara")]
         public int BackeryId { get; set; }
+        public int LastTurnoverId { get; set; }
         public IEnumerable<TurnoverDetailDto> TurnoverDetails { get; set; }
     }
 }

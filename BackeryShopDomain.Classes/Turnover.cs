@@ -20,6 +20,7 @@ namespace BackeryShopDomain.Classes
         public int BackeryId { get; set; }
         public Backery Backery { get; set; }
 
+        public int LastTurnoverId { get; set; }
         public ICollection<TurnoverDetail> TurnoverDetail { get; set; }
  
     }

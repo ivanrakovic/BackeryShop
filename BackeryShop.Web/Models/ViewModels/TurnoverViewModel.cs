@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using BackeryShopDomain.Classes;
+using BackeryShopDomain.Classes.Entities;
 
 namespace BackeryShop.Web.Models.ViewModels
 {
@@ -10,13 +8,13 @@ namespace BackeryShop.Web.Models.ViewModels
     {
         public TurnoverViewModel()
         {
-            TurnoverProductsViewModels = new List<TurnoverProductViewModel>();
+            TurnoverProductsViewModels = new List<TurnoverDetailDto>();
         }
 
-        public Backery Backery { get; set; }
+        public BackeryDto Backery { get; set; }
         public DateTime Date { get; set; }
         public int Shift { get; set; }
-        public List<TurnoverProductViewModel> TurnoverProductsViewModels { get; set; }
+        public List<TurnoverDetailDto> TurnoverProductsViewModels { get; set; }
 
     }
 }

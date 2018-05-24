@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
 using BackeryShopDomain.Classes;
 using BackeryShopDomain.Classes.Entities;
 
@@ -10,18 +9,18 @@ namespace BackeryShopDomain.DataModel.Repositories
     public static class TurnoverRepository
     {
 
-        public static List<TurnoverDetailDto> GetDataForNewTurnover(Backery backery)
+        public static List<TurnoverDetailDto> GetDataForNewTurnover(int backeryId)
         {
             var result = new List<TurnoverDetailDto>();
-            var lastId = TurnoverRepository.GetLastTurnoverId(backery);
+            var lastId = GetLastTurnoverId(backeryId);
             using (var db = new BackeryContext())
             {
                 result = (from b in db.Backeries
                     join pl in db.PriceLists on b.PriceListId equals pl.Id
                     join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
                     join p in db.Products on pld.ProductId equals p.Id
-                    where b.Id == backery.Id
-                    orderby pld.OrderNo descending
+                    where b.Id == backeryId
+                          orderby pld.OrderNo descending
                     select new TurnoverDetailDto
                     {
                         ProductName = p.Name,
@@ -29,7 +28,7 @@ namespace BackeryShopDomain.DataModel.Repositories
                         Price = pld.Price
                     }).ToList();
             }
-            var oldBalances = GetBalancesForTurnoverId(backery.Id, lastId);
+            var oldBalances = GetBalancesForTurnoverId(backeryId, lastId);
             if (oldBalances.Any())
             {
                 foreach (var item in result)
@@ -102,6 +101,29 @@ namespace BackeryShopDomain.DataModel.Repositories
             return result;
         }
 
+        public static TurnoverDto GetNextTurnoverDataFromTurnoverId(int backeryId, int turnoverId)
+        {
+            var result = new TurnoverDto
+            {
+                BackeryId = backeryId,
+                ShiftNo = 1,
+                Date = DateTime.Today
+            };
+            using (var db = new BackeryContext())
+            {
+                var backery = db.Backeries.Find(backeryId);
+                var turnData = db.Turnovers.Find(turnoverId);
+                if (turnData != null)
+                {
+                    result.BackeryId = backery.Id;
+                    result.ShiftNo = (backery.NumberOfShifts == turnData.ShiftNo) ? 1 : turnData.ShiftNo + 1;
+                    result.Date = (backery.NumberOfShifts == turnData.ShiftNo) ? turnData.Date.AddDays(1) : turnData.Date;
+                    result.LastTurnoverId = turnoverId;
+                }
+            }
+            return result;
+        }
+
         public static int SaveTurnoverData(TurnoverDto dataDto)
         {
             var result = -1;
@@ -114,7 +136,8 @@ namespace BackeryShopDomain.DataModel.Repositories
                     {
                         Date = dataDto.Date,
                         BackeryId = dataDto.BackeryId,
-                        ShiftNo = dataDto.ShiftNo
+                        ShiftNo = dataDto.ShiftNo,
+                        LastTurnoverId = dataDto.LastTurnoverId,
                     };
                     db.Turnovers.Add(turnover);
                     db.SaveChanges();
@@ -144,13 +167,12 @@ namespace BackeryShopDomain.DataModel.Repositories
             }
             return result;
         }
-
-        public static int GetLastTurnoverId(Backery backery)
+        public static int GetLastTurnoverId(int backeryId)
         {
             var id = 0;
             using (var db = new BackeryContext())
             {
-                var t = db.Turnovers.Where(x => x.BackeryId == backery.Id);
+                var t = db.Turnovers.Where(x => x.BackeryId == backeryId);
                 if (t.Any())
                 {
                     id = t.Max(i => i.Id);
@@ -159,12 +181,12 @@ namespace BackeryShopDomain.DataModel.Repositories
             };
         }
 
-        public static int GetTurnoverIdFromDataAndShift(Backery backery, DateTime date, int shift)
+        public static int GetTurnoverIdFromDataAndShift(int backeryId, DateTime date, int shift)
         {
             var id = 0;
             using (var db = new BackeryContext())
             {
-                var t = db.Turnovers.Where(x => x.Date == date && x.BackeryId == backery.Id && x.ShiftNo == shift);
+                var t = db.Turnovers.Where(x => x.Date == date && x.BackeryId == backeryId && x.ShiftNo == shift);
                 if (t.Any())
                 {
                     id = t.Max(i => i.Id);
@@ -172,5 +194,21 @@ namespace BackeryShopDomain.DataModel.Repositories
                 return id;
             };
         }
+
+        public static BackeryDto GetBackery(int backeryId)
+        {
+            var result = new BackeryDto();
+            using (var db = new BackeryContext())
+            {
+                var backery = db.Backeries.Find(backeryId);
+                if (backery != null)
+                {
+                    result.Id = backery.Id;
+                    result.Name = backery.Name;
+                    result.NumberOfShifts = backery.NumberOfShifts;
+                }
+            };
+            return result;
+        } 
     }
 }

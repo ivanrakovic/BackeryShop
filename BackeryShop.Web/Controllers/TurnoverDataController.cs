@@ -16,19 +16,15 @@ namespace BackeryShop.Web.Controllers
         // GET: TurnoverData
         public ActionResult Create(int id)
         {
-            var model = new TurnoverViewModel();
-
-            using (var db = new BackeryContext())
+            var model = new TurnoverViewModel
             {
-                var backery = db.Backeries.Find(id);
-                model.Backery = backery;
+                Backery = TurnoverRepository.GetBackery(id),                
             };
 
-            var newDataForBakery = TurnoverService.GetNextTurnoverDataForBakery(model.Backery);
+            var newDataForBakery = TurnoverService.GetNextTurnoverDataForBakery(id);
             model.Shift = newDataForBakery.ShiftNo;
             model.Date = newDataForBakery.Date;
-            model.TurnoverProductsViewModels = TurnoverService.GetDataForNewTurnover(model.Backery);
-
+            model.TurnoverProductsViewModels = TurnoverRepository.GetDataForNewTurnover(id);
             return View(model);
         }
 
