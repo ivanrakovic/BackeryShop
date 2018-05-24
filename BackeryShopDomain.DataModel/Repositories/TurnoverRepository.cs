@@ -209,6 +209,26 @@ namespace BackeryShopDomain.DataModel.Repositories
                 }
             };
             return result;
-        } 
+        }
+        public static List<BackeryDto> GetAllBackeries()
+        {
+            var result = new List<BackeryDto>();
+            using (var db = new BackeryContext())
+            {
+               var backeriesList = db.Backeries.ToList();
+                foreach (var item in backeriesList)
+                {
+                    var backery = new BackeryDto
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        NumberOfShifts = item.NumberOfShifts
+                    };
+                    result.Add(backery);
+                }
+            }
+            return result;
+        }
+
     }
 }

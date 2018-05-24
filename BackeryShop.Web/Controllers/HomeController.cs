@@ -1,5 +1,6 @@
 ﻿using BackeryShop.Web.Models.ViewModels;
 using BackeryShopDomain.DataModel;
+using BackeryShopDomain.DataModel.Repositories;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,12 +11,11 @@ namespace BackeryShop.Web.Controllers
 		public ActionResult Index()
 		{
 
-            var model = new HomeViewModel();
-            using (var db = new BackeryContext())
+            var model = new HomeViewModel
             {
-                model.BackeriesList = db.Backeries.ToList();
-            }
-                return View(model);
+                BackeriesList = TurnoverRepository.GetAllBackeries()
+            };
+            return View(model);
 		}
 
 		public ActionResult About()

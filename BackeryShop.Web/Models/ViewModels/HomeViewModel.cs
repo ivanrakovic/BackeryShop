@@ -1,13 +1,12 @@
-﻿using BackeryShopDomain.Classes;
-using System;
+﻿using BackeryShopDomain.Classes.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace BackeryShop.Web.Models.ViewModels
 {
     public class HomeViewModel
     {
-        public IEnumerable<Backery> BackeriesList { get; set; }
+        public IEnumerable<BackeryDto> BackeriesList { get; set; }
+        public bool ShowTurnoverInputs => BackeriesList.Any();
     }
 }
