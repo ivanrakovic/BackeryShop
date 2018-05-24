@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backery.cs" />
+    <Compile Include="Entities\BackeryDto.cs" />
     <Compile Include="Entities\TurnoverDetailDto.cs" />
     <Compile Include="Entities\TurnoverDto.cs" />
     <Compile Include="Turnover.cs" />
