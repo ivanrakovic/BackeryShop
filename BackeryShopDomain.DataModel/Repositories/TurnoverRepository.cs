@@ -16,17 +16,17 @@ namespace BackeryShopDomain.DataModel.Repositories
             using (var db = new BackeryContext())
             {
                 result = (from b in db.Backeries
-                    join pl in db.PriceLists on b.PriceListId equals pl.Id
-                    join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
-                    join p in db.Products on pld.ProductId equals p.Id
-                    where b.Id == backeryId
+                          join pl in db.PriceLists on b.PriceListId equals pl.Id
+                          join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
+                          join p in db.Products on pld.ProductId equals p.Id
+                          where b.Id == backeryId
                           orderby pld.OrderNo descending
-                    select new TurnoverDetailDto
-                    {
-                        ProductName = p.Name,
-                        ProductId = p.Id,
-                        Price = pld.Price
-                    }).ToList();
+                          select new TurnoverDetailDto
+                          {
+                              ProductName = p.Name,
+                              ProductId = p.Id,
+                              Price = pld.Price
+                          }).ToList();
             }
             var oldBalances = GetBalancesForTurnoverId(backeryId, lastId);
             if (oldBalances.Any())
@@ -46,21 +46,21 @@ namespace BackeryShopDomain.DataModel.Repositories
         public static List<TurnoverDetailDto> GetDataForNewTurnover(int backeryId, DateTime date, int shift)
         {
             var result = new List<TurnoverDetailDto>();
-            
+
             using (var db = new BackeryContext())
             {
                 result = (from b in db.Backeries
-                    join pl in db.PriceLists on b.PriceListId equals pl.Id
-                    join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
-                    join p in db.Products on pld.ProductId equals p.Id
-                    where b.Id == backeryId
+                          join pl in db.PriceLists on b.PriceListId equals pl.Id
+                          join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
+                          join p in db.Products on pld.ProductId equals p.Id
+                          where b.Id == backeryId
                           orderby pld.OrderNo descending
-                    select new TurnoverDetailDto
-                    {
-                        ProductName = p.Name,
-                        ProductId = p.Id,
-                        Price = pld.Price
-                    }).ToList();
+                          select new TurnoverDetailDto
+                          {
+                              ProductName = p.Name,
+                              ProductId = p.Id,
+                              Price = pld.Price
+                          }).ToList();
 
 
 
@@ -89,13 +89,13 @@ namespace BackeryShopDomain.DataModel.Repositories
             using (var db = new BackeryContext())
             {
                 result = (from td in db.Turnovers
-                        join tdd in db.TurnoverDetails on td.Id equals tdd.TurnoverId
-                        where td.BackeryId == backeryId && td.Id == turnoverId
-                        select new TurnoverDetailDto
-                        {
-                            ProductId = tdd.ProductId,
-                            PreviousBalance = tdd.PreviousBalance
-                        }
+                          join tdd in db.TurnoverDetails on td.Id equals tdd.TurnoverId
+                          where td.BackeryId == backeryId && td.Id == turnoverId
+                          select new TurnoverDetailDto
+                          {
+                              ProductId = tdd.ProductId,
+                              PreviousBalance = tdd.PreviousBalance
+                          }
                     ).ToList();
             }
             return result;
@@ -157,7 +157,7 @@ namespace BackeryShopDomain.DataModel.Repositories
                             TurnoverId = lastId
                         };
                         tDetails.Add(td);
-                        
+
                     };
                     db.TurnoverDetails.AddRange(tDetails);
                     db.SaveChanges();
@@ -215,16 +215,19 @@ namespace BackeryShopDomain.DataModel.Repositories
             var result = new List<BackeryDto>();
             using (var db = new BackeryContext())
             {
-               var backeriesList = db.Backeries.ToList();
-                foreach (var item in backeriesList)
+                var backeriesList = db.Backeries.ToList();
+                if (backeriesList.Any())
                 {
-                    var backery = new BackeryDto
+                    foreach (var item in backeriesList)
                     {
-                        Id = item.Id,
-                        Name = item.Name,
-                        NumberOfShifts = item.NumberOfShifts
-                    };
-                    result.Add(backery);
+                        var backery = new BackeryDto
+                        {
+                            Id = item.Id,
+                            Name = item.Name,
+                            NumberOfShifts = item.NumberOfShifts
+                        };
+                        result.Add(backery);
+                    }
                 }
             }
             return result;
