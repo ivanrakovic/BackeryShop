@@ -14,6 +14,9 @@ namespace BackeryShopDomain.Classes
         [Display(Name = "Proizvod")]
         public int ProductId { get; set; }
 
+        [Display(Name = "Naziv proizvoda")]
+        public string ProductName { get; set; }
+
         [Display(Name = "Cena")]
         public decimal Price { get; set; }
 

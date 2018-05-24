@@ -36,7 +36,7 @@ namespace BackeryShopDomain.DataModel.Repositories
                     var oldBal = oldBalances.Where(x => x.ProductId == item.ProductId).ToList();
                     if (oldBal.Any())
                     {
-                        item.PreviousBalance = oldBal.First().PreviousBalance;
+                        item.PreviousBalance = oldBal.First().NewBalance;
                     }
                 }
             }
@@ -94,6 +94,8 @@ namespace BackeryShopDomain.DataModel.Repositories
                           select new TurnoverDetailDto
                           {
                               ProductId = tdd.ProductId,
+                              ProductName = tdd.ProductName,
+                              NewBalance = tdd.NewBalance,
                               PreviousBalance = tdd.PreviousBalance
                           }
                     ).ToList();
@@ -148,6 +150,7 @@ namespace BackeryShopDomain.DataModel.Repositories
                         var td = new TurnoverDetail
                         {
                             ProductId = item.ProductId,
+                            ProductName = item.ProductName,
                             Price = item.Price,
                             PreviousBalance = item.PreviousBalance,
                             BakedNew = item.BakedNew,

@@ -10,7 +10,8 @@
 {
 
     @Html.AntiForgeryToken()
-     @Html.HiddenFor(m => m.Backery.Id, new { id = "BackeryId"})
+    @Html.HiddenFor(m => m.Backery.Id, new { id = "BackeryId" })
+    @Html.HiddenFor(m => m.LastTurnoverId)
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
@@ -45,7 +46,7 @@
                     </dl>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <a class="btn btn-success js-turnover-submit" href="#">
@@ -66,10 +67,10 @@
                             <th class="col-md-2">Naziv</th>
                             <th class="col-md-1">Cena</th>
                             <th class="col-md-1">Staro Stanje</th>
-                            <th class="col-md-1">Novo Stanje</th>
                             <th class="col-md-1">Došlo</th>
                             <th class="col-md-1">Škart</th>
                             <th class="col-md-1">Prodato</th>
+                            <th class="col-md-1">Novo Stanje</th>
                             <th class="col-md-1">Ukupno</th>
                         </tr>
                     </thead>
@@ -78,38 +79,39 @@
                         @foreach (var item in Model.TurnoverProductsViewModels)
                         {
 
-                            <tr class="js-turnover-detail" data-row-id="@i">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ProductId)
-                                    @Html.HiddenFor(modelItem => item.ProductId, new {id = "ProductId" })
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ProductName)
-                                    @Html.HiddenFor(modelItem => item.ProductName, new { id = "ProductName" }) 
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Price)
-                                    @Html.HiddenFor(modelItem => item.Price, new { id = "Price" })
-                                </td>
-                                <td class="hidden-phone">
-                                    <input class="form-control js-decimal" type="text" id="PreviousBalance_@i" readonly value="@item.PreviousBalance" />
-                                </td>
-                                <td class="hidden-phone">
-                                    <input class="form-control js-decimal" type="text" id="NewBalance_@i" value="0" />
-                                </td>
-                                <td class="hidden-phone">
-                                    <input class="form-control js-decimal" type="text" id="BakedNew_@i" value="0" />
-                                </td>
-                                <td>
-                                    <input class="form-control js-decimal" type="text" id="Scrap_@i" value="0" />
-                                </td>
-                                <td>
-                                    <input class="form-control js-decimal" type="text" id="Sold_@i" value="0" />
-                                </td>
-                                <td>
-                                    <input class="form-control js-decimal" type="text" id="Total_@i" readonly value="0" />
-                                </td>
-                            </tr>
+                        <tr class="js-turnover-detail" data-row-id="@i">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductId)
+                                @Html.HiddenFor(modelItem => item.ProductId, new { id = "ProductId" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductName)
+                                @Html.HiddenFor(modelItem => item.ProductName, new { id = "ProductName" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                                @Html.HiddenFor(modelItem => item.Price, new { id = "Price" })
+                            </td>
+                            <td class="hidden-phone">
+                                <input class="form-control js-decimal" type="text" id="PreviousBalance_@i" readonly value="@item.PreviousBalance" />
+                            </td>
+
+                            <td class="hidden-phone">
+                                <input class="form-control js-decimal" type="text" id="BakedNew_@i" value="0" />
+                            </td>
+                            <td>
+                                <input class="form-control js-decimal" type="text" id="Scrap_@i" value="0" />
+                            </td>
+                            <td>
+                                <input class="form-control js-decimal" type="text" id="Sold_@i" value="0" />
+                            </td>
+                            <td class="hidden-phone">
+                                <input class="form-control js-decimal" type="text" id="NewBalance_@i" value="0" />
+                            </td>
+                            <td>
+                                <input class="form-control js-decimal" type="text" id="Total_@i" readonly value="0" />
+                            </td>
+                        </tr>
                             i = i + 1;
                         }
                     </tbody>

@@ -24,6 +24,7 @@ namespace BackeryShop.Web.Controllers
             var newDataForBakery = TurnoverService.GetNextTurnoverDataForBakery(id);
             model.Shift = newDataForBakery.ShiftNo;
             model.Date = newDataForBakery.Date;
+            model.LastTurnoverId = newDataForBakery.LastTurnoverId;
             model.TurnoverProductsViewModels = TurnoverRepository.GetDataForNewTurnover(id);
             return View(model);
         }
