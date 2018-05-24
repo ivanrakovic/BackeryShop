@@ -1,7 +1,7 @@
 ﻿@model BackeryShop.Web.Models.ViewModels.HomeViewModel
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Početni ekran";
 }
 
 <div class="jumbotron">
@@ -11,16 +11,18 @@
 </div>
 
 <div class="row">
-    @foreach (var item in Model.BackeriesList)
+    @if (Model.ShowTurnoverInputs)
     {
-        <div class="col-md-4">
-            <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
-            <p>
-                <a href="@Url.Action("Create", "TurnoverData", new { id = item.Id })" class="btn btn-default">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novi unos prometa &raquo;
-                </a>
-            </p>
-        </div>
+        foreach (var item in Model.BackeriesList)
+        {
+            <div class="col-md-4">
+                <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+                <p>
+                    <a href="@Url.Action("Create", "TurnoverData", new { id = item.Id })" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novi unos prometa &raquo;
+                    </a>
+                </p>
+            </div>
+        }
     }
-
 </div>
