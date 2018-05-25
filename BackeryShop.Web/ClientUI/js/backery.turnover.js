@@ -12,13 +12,35 @@ Backery.turnover = (function ($) {
         language: "sr-latin"
     });
 
-    $('.js-decimal').inputmask({
+    var ob = {
         alias: "decimal",
         integerDigits: 5,
         digits: 2,
         digitsOptional: false,
+        allowZero: true,
+       
         placeholder: "0",
-        allowMinus: false
+        allowMinus: true,
+        autoclear: false 
+    };
+    $('.js-decimal').inputmask(ob);
+
+    $('.js-decimal').blur(function (e) {
+        var self = $(this);
+        
+        var id = self.closest('tr').attr('data-row-id');
+        var prevbal = parseFloat($('#PreviousBalance_' + id).val()) || 0;
+        var bakedNew = parseFloat($('#BakedNew_' + id).val()) || 0;
+        var scrap = parseFloat($('#Scrap_' + id).val()) || 0;
+        var sold = parseFloat($('#Sold_' + id).val()) || 0;
+        var price = parseFloat($('#Price_' + id).val()) || 0;
+        var newbal = prevbal + bakedNew - sold - scrap;
+        
+        $('#NewBalance_' + id).val(newbal).inputmask(ob);
+        $('#Total_' + id).val(sold * price).inputmask(ob);
+        if (self.val() == '') {
+            self.val('0').inputmask(ob);
+        }
     });
 
     $('.js-turnover-submit').click(function (e) {
