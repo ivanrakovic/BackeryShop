@@ -28,3 +28,7 @@ textarea {
         padding: 3px 3px;
         height: 25px;
     }
+
+    input.form-control.js-decimal-invalid {
+        background-color: #ffbbbb;
+    }

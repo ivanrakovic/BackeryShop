@@ -18,16 +18,16 @@ Backery.turnover = (function ($) {
         digits: 2,
         digitsOptional: false,
         allowZero: true,
-       
+
         placeholder: "0",
         allowMinus: true,
-        autoclear: false 
+        autoclear: false
     };
     $('.js-decimal').inputmask(ob);
 
-    $('.js-decimal').blur(function (e) {
+    $('.js-decimal').focusout(function (e) {
         var self = $(this);
-        
+
         var id = self.closest('tr').attr('data-row-id');
         var prevbal = parseFloat($('#PreviousBalance_' + id).val()) || 0;
         var bakedNew = parseFloat($('#BakedNew_' + id).val()) || 0;
@@ -35,13 +35,22 @@ Backery.turnover = (function ($) {
         var sold = parseFloat($('#Sold_' + id).val()) || 0;
         var price = parseFloat($('#Price_' + id).val()) || 0;
         var newbal = prevbal + bakedNew - sold - scrap;
-        
-        $('#NewBalance_' + id).val(newbal).inputmask(ob);
+        var newBalInput = $('#NewBalance_' + id);
+        if (newbal < 0) {
+            if (!newBalInput.hasClassnewBalInput) {
+                newBalInput.addClass('js-decimal-invalid');
+            }
+        } else
+            newBalInput.removeClass('js-decimal-invalid');
+
+        newBalInput.val(newbal).inputmask(ob);
+
         $('#Total_' + id).val(sold * price).inputmask(ob);
         if (self.val() == '') {
             self.val('0').inputmask(ob);
         }
     });
+    
 
     $('.js-turnover-submit').click(function (e) {
         e.preventDefault();
@@ -50,7 +59,7 @@ Backery.turnover = (function ($) {
         var shift = $("input:radio[name='shiftgrp']:checked").val();
         var bakeryId = $('#BackeryId').val();
         var lastTurnoverId = $('#LastTurnoverId').val();
-        
+
         var data = {
             Date: selDdate.toDateString(),
             ShiftNo: shift,
@@ -62,7 +71,7 @@ Backery.turnover = (function ($) {
         $('tr.js-turnover-detail').each(function (e) {
             var tr = $(this);
             var o = {};
-            tr.find('input').each(function(evn) {
+            tr.find('input').each(function (evn) {
                 var inpt = $(this);
                 o[inpt[0].id.split('_')[0]] = inpt.val();
             });
@@ -73,7 +82,7 @@ Backery.turnover = (function ($) {
         $.ajax({
             url: "/TurnoverData/InsertTurnover",
             type: 'POST',
-            data: JSON.stringify(data) ,
+            data: JSON.stringify(data),
             contentType: 'application/json; charset=utf-8',
             success: function (response) {
                 if (response.success)
