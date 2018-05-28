@@ -23,6 +23,7 @@ Backery.turnover = (function ($) {
         allowMinus: true,
         autoclear: false
     };
+
     $('.js-decimal').inputmask(ob);
 
     $('.js-decimal').focusout(function (e) {
@@ -49,8 +50,8 @@ Backery.turnover = (function ($) {
         if (self.val() == '') {
             self.val('0').inputmask(ob);
         }
+        caluculateTotal();
     });
-    
 
     $('.js-turnover-submit').click(function (e) {
         e.preventDefault();
@@ -96,6 +97,15 @@ Backery.turnover = (function ($) {
         return false;
     });
 
-
+    caluculateTotal = function () {
+        let total = 0;
+         var inputs = $("input[id*='Total']");
+         inputs.each(function (e) {
+             var inpt = $(this);
+             total = total + parseFloat(inpt.val()) || 0;
+        });
+        $('#totalsum').text(total.toFixed(2) + ' RSD');
+        return false;
+    };
     return me;
 }(jQuery));
