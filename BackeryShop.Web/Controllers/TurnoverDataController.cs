@@ -8,6 +8,8 @@ using BackeryShopDomain.Classes.Entities;
 using BackeryShopDomain.DataModel;
 using Microsoft.SqlServer.Server;
 using BackeryShopDomain.DataModel.Repositories;
+using System.Collections.Generic;
+using System;
 
 namespace BackeryShop.Web.Controllers
 {
@@ -44,5 +46,18 @@ namespace BackeryShop.Web.Controllers
             return View("Create",model);
         }
 
+        [HttpGet]
+        public ActionResult GetTurnoverDataForDateShift(int backeryId, DateTime date, int shift)
+        {
+            var model = new List<TurnoverDetailDto>();
+            if (ModelState.IsValid)
+            {
+                var modelData = TurnoverRepository.GetDataForTurnoverFromDataAndShift(backeryId, date, shift);
+                return PartialView("TurnoverDetails", modelData);
+            }
+
+
+            return null;//View("Create", model);
+        }
     }
 }

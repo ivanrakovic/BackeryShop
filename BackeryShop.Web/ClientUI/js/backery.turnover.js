@@ -9,8 +9,13 @@ Backery.turnover = (function ($) {
         todayHighlight: true,
         weekStart: 1,
         todayBtn: "linked",
-        language: "sr-latin"
-    });
+        language: "sr-latin",
+    }).change(dateChanged)
+     .on('changeDate', dateChanged);
+
+    function dateChanged(ev) {
+        getTurnoverData();
+    }
 
     var ob = {
         alias: "decimal",
@@ -18,15 +23,19 @@ Backery.turnover = (function ($) {
         digits: 2,
         digitsOptional: false,
         allowZero: true,
-
         placeholder: "0",
         allowMinus: true,
         autoclear: false
     };
 
-    $('.js-decimal').inputmask(ob);
+    $('body .js-turnover-filter').click(function (e) {
+        getTurnoverData();
+    });
 
-    $('.js-decimal').focusout(function (e) {
+    $('body .js-decimal').inputmask(ob);
+
+
+    $(document).on('focusout', '.js-decimal', function (e) {
         var self = $(this);
 
         var id = self.closest('tr').attr('data-row-id');
@@ -97,12 +106,44 @@ Backery.turnover = (function ($) {
         return false;
     });
 
+    getTurnoverData = function () {
+        var selDdate = $('#turnover-date-input').datepicker('getDate');
+        var shift = $("input:radio[name='shiftgrp']:checked").val();
+        var bakeryId = $('#BackeryId').val();
+        var lastTurnoverId = $('#LastTurnoverId').val();
+
+        var data = {
+            date: selDdate.toDateString(),
+            shift: shift,
+            backeryId: bakeryId,
+            lastTurnoverId: lastTurnoverId
+        };
+
+        $.ajax({
+            url: "/TurnoverData/GetTurnoverDataForDateShift",
+            type: 'GET',
+            data: data,
+            success: function (data) {
+                var m = $('#turnover-detail-data');
+                m.html(data);
+                reCaluculateAll();
+            }
+        });
+    };
+
+    reCaluculateAll = function () {
+        var inputs = $("input[id*='BakedNew']");
+        inputs.each(function (e) {
+            $(this).blur();
+        });
+    };
+
     caluculateTotal = function () {
         let total = 0;
-         var inputs = $("input[id*='Total']");
-         inputs.each(function (e) {
-             var inpt = $(this);
-             total = total + parseFloat(inpt.val()) || 0;
+        var inputs = $("input[id*='Total']");
+        inputs.each(function (e) {
+            var inpt = $(this);
+            total = total + parseFloat(inpt.val()) || 0;
         });
         $('#totalsum').text(total.toFixed(2) + ' RSD');
         return false;

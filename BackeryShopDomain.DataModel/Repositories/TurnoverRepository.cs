@@ -62,8 +62,6 @@ namespace BackeryShopDomain.DataModel.Repositories
                               Price = pld.Price
                           }).ToList();
 
-
-
             }
 
             var lastId = 0;
@@ -83,6 +81,21 @@ namespace BackeryShopDomain.DataModel.Repositories
         }
 
 
+        public static List<TurnoverDetailDto> GetDataForTurnoverFromDataAndShift(int backeryId, DateTime date, int shift)
+        {
+            var result = new List<TurnoverDetailDto>();
+            var targetId = GetTurnoverIdFromDataAndShift(backeryId, date, shift);
+            
+            
+            var oldBalances = GetBalancesForTurnoverId(backeryId, targetId);
+            if (oldBalances.Any())
+            {
+                result = oldBalances;
+            }
+            return result;
+        }
+        
+
         public static List<TurnoverDetailDto> GetBalancesForTurnoverId(int backeryId, int turnoverId)
         {
             var result = new List<TurnoverDetailDto>();
@@ -96,6 +109,10 @@ namespace BackeryShopDomain.DataModel.Repositories
                               ProductId = tdd.ProductId,
                               ProductName = tdd.ProductName,
                               NewBalance = tdd.NewBalance,
+                              Scrap = tdd.Scrap,
+                              Sold = tdd.Sold,
+                              Price = tdd.Price,
+                              BakedNew = tdd.BakedNew,
                               PreviousBalance = tdd.PreviousBalance
                           }
                     ).ToList();
