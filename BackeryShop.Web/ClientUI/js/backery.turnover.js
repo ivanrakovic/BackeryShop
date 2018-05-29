@@ -123,12 +123,15 @@ Backery.turnover = (function ($) {
             url: "/TurnoverData/GetTurnoverDataForDateShift",
             type: 'GET',
             data: data,
-            success: function (data) {
+            success: function(data) {
                 var m = $('#turnover-detail-data');
-                m.html(data);
+                m.html(data.view);
+                $('#LastTurnoverId').val(data.lastTurnoverId);
                 reCaluculateAll();
+                caluculateTotal();
             }
         });
+
     };
 
     reCaluculateAll = function () {
@@ -139,7 +142,7 @@ Backery.turnover = (function ($) {
     };
 
     caluculateTotal = function () {
-        let total = 0;
+        var total = 0;
         var inputs = $("input[id*='Total']");
         inputs.each(function (e) {
             var inpt = $(this);

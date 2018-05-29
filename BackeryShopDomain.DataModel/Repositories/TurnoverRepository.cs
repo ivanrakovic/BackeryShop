@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using BackeryShopDomain.Classes;
 using BackeryShopDomain.Classes.Entities;
@@ -79,23 +80,32 @@ namespace BackeryShopDomain.DataModel.Repositories
             }
             return result;
         }
-
-
-        public static List<TurnoverDetailDto> GetDataForTurnoverFromDataAndShift(int backeryId, DateTime date, int shift)
+        
+        public static TurnoverDto GetDataForTurnoverFromDataAndShift(int backeryId, DateTime date, int shift)
         {
-            var result = new List<TurnoverDetailDto>();
             var targetId = GetTurnoverIdFromDataAndShift(backeryId, date, shift);
+            var result = new TurnoverDto
+            {
+                BackeryId = backeryId,
+                Date = date,
+                ShiftNo = shift,
+                LastTurnoverId = targetId.Item1,
+                TurnoverDetails = new List<TurnoverDetailDto>()
+            };
             
+            var oldBalances = GetBalancesForTurnoverId(backeryId, targetId.Item2);
             
-            var oldBalances = GetBalancesForTurnoverId(backeryId, targetId);
             if (oldBalances.Any())
             {
-                result = oldBalances;
+                result.TurnoverDetails = oldBalances;
+            }
+            else
+            {
+                
             }
             return result;
         }
         
-
         public static List<TurnoverDetailDto> GetBalancesForTurnoverId(int backeryId, int turnoverId)
         {
             var result = new List<TurnoverDetailDto>();
@@ -187,6 +197,7 @@ namespace BackeryShopDomain.DataModel.Repositories
             }
             return result;
         }
+
         public static int GetLastTurnoverId(int backeryId)
         {
             var id = 0;
@@ -201,17 +212,21 @@ namespace BackeryShopDomain.DataModel.Repositories
             };
         }
 
-        public static int GetTurnoverIdFromDataAndShift(int backeryId, DateTime date, int shift)
+        public static Tuple<int, int> GetTurnoverIdFromDataAndShift(int backeryId, DateTime date, int shift)
         {
             var id = 0;
+            var lastId = 0;
+
             using (var db = new BackeryContext())
             {
                 var t = db.Turnovers.Where(x => x.Date == date && x.BackeryId == backeryId && x.ShiftNo == shift);
                 if (t.Any())
                 {
-                    id = t.Max(i => i.Id);
+                    var turnData = t.OrderByDescending(x => x.Id).FirstOrDefault();
+                    id = turnData.Id;
+                    lastId = turnData.LastTurnoverId;
                 }
-                return id;
+                return Tuple.Create(lastId, id);
             };
         }
 
@@ -230,6 +245,7 @@ namespace BackeryShopDomain.DataModel.Repositories
             };
             return result;
         }
+
         public static List<BackeryDto> GetAllBackeries()
         {
             var result = new List<BackeryDto>();
@@ -252,6 +268,5 @@ namespace BackeryShopDomain.DataModel.Repositories
             }
             return result;
         }
-
     }
 }

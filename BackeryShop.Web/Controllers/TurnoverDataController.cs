@@ -10,6 +10,7 @@ using Microsoft.SqlServer.Server;
 using BackeryShopDomain.DataModel.Repositories;
 using System.Collections.Generic;
 using System;
+using System.IO;
 
 namespace BackeryShop.Web.Controllers
 {
@@ -47,17 +48,36 @@ namespace BackeryShop.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetTurnoverDataForDateShift(int backeryId, DateTime date, int shift)
+        public JsonResult GetTurnoverDataForDateShift(int backeryId, DateTime date, int shift)
         {
             var model = new List<TurnoverDetailDto>();
             if (ModelState.IsValid)
             {
                 var modelData = TurnoverRepository.GetDataForTurnoverFromDataAndShift(backeryId, date, shift);
-                return PartialView("TurnoverDetails", modelData);
+                return Json(new
+                {
+                    view = RenderRazorViewToString(ControllerContext, "TurnoverDetails", modelData.TurnoverDetails.ToList()),
+                    lastTurnoverId = modelData.LastTurnoverId
+                },
+                    JsonRequestBehavior.AllowGet);
             }
 
 
             return null;//View("Create", model);
+        }
+
+
+        public static string RenderRazorViewToString(ControllerContext controllerContext, string viewName, object model)
+        {
+            controllerContext.Controller.ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(controllerContext, viewName);
+                var viewContext = new ViewContext(controllerContext, viewResult.View, controllerContext.Controller.ViewData, controllerContext.Controller.TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(controllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
     }
 }
