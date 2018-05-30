@@ -78,7 +78,7 @@ Backery.turnover = (function ($) {
         };
 
         var rows = [];
-        $('tr.js-turnover-detail').each(function (e) {
+        $('tr.js-turnover-detail').each(function (ef) {
             var tr = $(this);
             var o = {};
             tr.find('input').each(function (evn) {
@@ -112,7 +112,7 @@ Backery.turnover = (function ($) {
         var bakeryId = $('#BackeryId').val();
         var lastTurnoverId = $('#LastTurnoverId').val();
 
-        var data = {
+        var turnData = {
             date: selDdate.toDateString(),
             shift: shift,
             backeryId: bakeryId,
@@ -122,7 +122,7 @@ Backery.turnover = (function ($) {
         $.ajax({
             url: "/TurnoverData/GetTurnoverDataForDateShift",
             type: 'GET',
-            data: data,
+            data: turnData,
             success: function(data) {
                 var m = $('#turnover-detail-data');
                 m.html(data.view);
