@@ -28,6 +28,7 @@ namespace BackeryShop.Web.Controllers
             model.Shift = newDataForBakery.ShiftNo;
             model.Date = newDataForBakery.Date;
             model.LastTurnoverId = newDataForBakery.LastTurnoverId;
+            model.IsEditMode = false;
             model.TurnoverProductsViewModels = TurnoverRepository.GetDataForNewTurnover(id);
             return View(model);
         }
@@ -38,8 +39,23 @@ namespace BackeryShop.Web.Controllers
         {
 
             if (ModelState.IsValid)
-            {
+            {                               
                 var i = TurnoverRepository.SaveTurnoverData(turnover);
+                return Json(new { success = true });
+            }
+
+            var model = new TurnoverViewModel();
+            return View("Create", model);
+        }
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult UpdateTurnover(TurnoverDto turnover)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var i = TurnoverRepository.UpdateTurnoverData(turnover);
                 return Json(new { success = true });
             }
 

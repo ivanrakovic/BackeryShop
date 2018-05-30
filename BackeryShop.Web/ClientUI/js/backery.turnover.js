@@ -89,8 +89,13 @@ Backery.turnover = (function ($) {
         });
 
         data["TurnoverDetails"] = rows;
+
+
+        var route = $('#IsEditMode').val() == 'False' ? 'Insert' : 'Update';
+
+        
         $.ajax({
-            url: "/TurnoverData/InsertTurnover",
+            url: '/TurnoverData/' + route + 'Turnover',
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json; charset=utf-8',
@@ -103,6 +108,7 @@ Backery.turnover = (function ($) {
                 alert("error");
             }
         });
+        
         return false;
     });
 

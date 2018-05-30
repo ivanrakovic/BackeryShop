@@ -16,6 +16,7 @@ namespace BackeryShop.Web.Models.ViewModels
         public int Shift { get; set; }
         public int LastTurnoverId { get; set; }
         public List<TurnoverDetailDto> TurnoverProductsViewModels { get; set; }
+        public bool IsEditMode { get; set; }
 
     }
 }

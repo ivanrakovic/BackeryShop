@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using BackeryShopDomain.Classes;
 using BackeryShopDomain.Classes.Entities;
-using BackeryShopDomain.DataModel.Helpers;
 
 namespace BackeryShopDomain.DataModel.Repositories
 {
@@ -178,6 +177,45 @@ namespace BackeryShopDomain.DataModel.Repositories
                     result.Date = (backery.NumberOfShifts == turnData.ShiftNo) ? turnData.Date.AddDays(1) : turnData.Date;
                     result.LastTurnoverId = turnoverId;
                 }
+            }
+            return result;
+        }
+
+        public static int UpdateTurnoverData(TurnoverDto dataDto)
+        {
+            var result = -1;
+            if (dataDto != null)
+            {
+
+                using (var db = new BackeryContext())
+                {
+                    //todo update lastId?
+                    var lastId = dataDto.Id;
+                    var tDetails = new List<TurnoverDetail>();
+                    foreach (var item in dataDto.TurnoverDetails)
+                    {
+                        var td = new TurnoverDetail
+                        {
+                            ProductId = item.ProductId,
+                            ProductName = item.ProductName,
+                            Price = item.Price,
+                            PreviousBalance = item.PreviousBalance,
+                            BakedNew = item.BakedNew,
+                            Sold = item.Sold,
+                            Scrap = item.Scrap,
+                            NewBalance = item.NewBalance,
+                            TurnoverId = lastId
+                        };
+                        tDetails.Add(td);
+
+                    };
+                    db.TurnoverDetails.RemoveRange(db.TurnoverDetails.Where(x => x.TurnoverId == dataDto.Id));
+                    db.SaveChanges();
+                    db.TurnoverDetails.AddRange(tDetails);
+                    db.SaveChanges();
+                }
+                return 1;
+
             }
             return result;
         }

@@ -12,6 +12,7 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Backery.Id, new { id = "BackeryId" })
     @Html.HiddenFor(m => m.LastTurnoverId)
+    @Html.HiddenFor(m => m.IsEditMode)
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
