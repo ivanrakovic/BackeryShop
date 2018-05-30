@@ -21,7 +21,7 @@ namespace BackeryShop.Web.Controllers
         {
             var model = new TurnoverViewModel
             {
-                Backery = TurnoverRepository.GetBackery(id),                
+                Backery = TurnoverRepository.GetBackery(id),
             };
 
             var newDataForBakery = TurnoverService.GetNextTurnoverDataForBakery(id);
@@ -36,15 +36,15 @@ namespace BackeryShop.Web.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult InsertTurnover(TurnoverDto turnover)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var i = TurnoverRepository.SaveTurnoverData(turnover);
-                return Json(new {success = true});
+                return Json(new { success = true });
             }
 
             var model = new TurnoverViewModel();
-            return View("Create",model);
+            return View("Create", model);
         }
 
         [HttpGet]
@@ -58,11 +58,8 @@ namespace BackeryShop.Web.Controllers
                 {
                     view = RenderRazorViewToString(ControllerContext, "TurnoverDetails", modelData.TurnoverDetails.ToList()),
                     lastTurnoverId = modelData.LastTurnoverId
-                },
-                    JsonRequestBehavior.AllowGet);
+                },JsonRequestBehavior.AllowGet);
             }
-
-
             return null;//View("Create", model);
         }
 

@@ -4,19 +4,6 @@ Backery.turnover = (function ($) {
 
     var me = {};
 
-    $('#turnover-date-input').datepicker({
-        format: "dd/mm/yyyy",
-        todayHighlight: true,
-        weekStart: 1,
-        todayBtn: "linked",
-        language: "sr-latin",
-    }).change(dateChanged)
-     .on('changeDate', dateChanged);
-
-    function dateChanged(ev) {
-        getTurnoverData();
-    }
-
     var ob = {
         alias: "decimal",
         integerDigits: 5,
@@ -27,6 +14,19 @@ Backery.turnover = (function ($) {
         allowMinus: true,
         autoclear: false
     };
+
+    $('#turnover-date-input').datepicker({
+        format: "dd/mm/yyyy",
+        todayHighlight: true,
+        weekStart: 1,
+        todayBtn: "linked",
+        language: "sr-latin",
+    }).change(dateChanged)
+     .on('changeDate', dateChanged);
+
+    function dateChanged() {
+        getTurnoverData();
+    }
 
     $('body .js-turnover-filter').click(function (e) {
         getTurnoverData();
@@ -129,6 +129,7 @@ Backery.turnover = (function ($) {
                 $('#LastTurnoverId').val(data.lastTurnoverId);
                 reCaluculateAll();
                 caluculateTotal();
+                $('.js-decimal').inputmask(ob);
             }
         });
 
