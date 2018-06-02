@@ -1,0 +1,22 @@
+﻿
+<div class="jumbotron">
+    <div class="row">
+        <h2>Meni za izmene šifarnika</h2>
+        <p>Odaberite šta da menjate</p>
+        <div class="col-md-4">
+            <p>
+                @Html.ActionLink("Šifarnik proizvoda", "Index", "Products", null, new { @class = "btn btn-primary btn-lg" })
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p>
+                @Html.ActionLink("Definisanje cenovnika", "Index", "PriceLists", null, new { @class = "btn btn-primary btn-lg" })
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p>
+                @Html.ActionLink("Spisak pekara ", "Index", "Backeries", null, new { @class = "btn btn-primary btn-lg" })
+            </p>
+        </div>
+    </div>
+</div>

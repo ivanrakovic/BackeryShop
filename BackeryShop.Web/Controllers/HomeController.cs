@@ -18,10 +18,8 @@ namespace BackeryShop.Web.Controllers
             return View(model);
 		}
 
-		public ActionResult About()
+		public ActionResult Settings()
 		{
-			ViewBag.Message = "Your application description page.";
-
 			return View();
 		}
 
