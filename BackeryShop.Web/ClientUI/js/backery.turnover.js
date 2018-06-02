@@ -35,7 +35,8 @@ Backery.turnover = (function ($) {
     });
 
     $('body .js-decimal').inputmask(ob);
-    $('body .js-decimal').keydown(function (e) {
+
+    $(document).on('keydown', '.js-decimal', function (e) {
         var self = $(this);
         var elementName = self[0].id;
         var startPos = self[0].selectionStart;
