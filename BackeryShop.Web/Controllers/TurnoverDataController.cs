@@ -39,7 +39,7 @@ namespace BackeryShop.Web.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult InsertTurnover(TurnoverDto turnover)
+        public ActionResult InsertDataTurnover(TurnoverDto turnover)
         {
 
             if (ModelState.IsValid)
@@ -54,7 +54,7 @@ namespace BackeryShop.Web.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult UpdateTurnover(TurnoverDto turnover)
+        public ActionResult UpdateDataTurnover(TurnoverDto turnover)
         {
 
             if (ModelState.IsValid)
@@ -77,6 +77,7 @@ namespace BackeryShop.Web.Controllers
                 model.LastTurnoverId = turnover.LastTurnoverId;
                 model.IsEditMode = turnover.IsExistingTurnover;
                 model.ProductsData = turnover.TurnoverDetails;
+                model.TurnoverId = turnover.Id;
             }
             return PartialView("TurnoverDetails", model);
         }

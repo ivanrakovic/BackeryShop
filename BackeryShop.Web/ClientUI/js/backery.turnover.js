@@ -69,12 +69,14 @@ Backery.turnover = (function ($) {
         var shift = $("input:radio[name='shiftgrp']:checked").val();
         var bakeryId = $('#BackeryId').val();
         var lastTurnoverId = $('#LastTurnoverId').val();
+        var turnoverId = $('#TurnoverId').val();
 
         var data = {
             Date: selDdate.toDateString(),
             ShiftNo: shift,
             BackeryId: bakeryId,
-            LastTurnoverId: lastTurnoverId
+            LastTurnoverId: lastTurnoverId,
+            Id: turnoverId
         };
 
         var rows = [];
@@ -95,7 +97,7 @@ Backery.turnover = (function ($) {
 
         
         $.ajax({
-            url: '/TurnoverData/' + route + 'Turnover',
+            url: '/TurnoverData/' + route + 'DataTurnover',
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json; charset=utf-8',
@@ -114,9 +116,12 @@ Backery.turnover = (function ($) {
 
     getTurnoverData = function () {
         var selDdate = $('#turnover-date-input').datepicker('getDate');
-        var shift = $("input:radio[name='shiftgrp']:checked").val();
+        var shiftElement = $("input:radio[name='shiftgrp']:checked");
+        var shift = shiftElement.val();
         var bakeryId = $('#BackeryId').val();
         var lastTurnoverId = $('#LastTurnoverId').val();
+        var shiftText = shiftElement.parent().find('span').text();
+        var formatedDate = selDdate.toLocaleDateString('nb-NO');
 
         var turnData = {
             date: selDdate.toDateString(),
@@ -134,7 +139,10 @@ Backery.turnover = (function ($) {
                 m.html(data);             
                 reCaluculateAll();
                 caluculateTotal();
+
                 $('.js-decimal').inputmask(ob);
+                $('#actionDate').text(formatedDate + ' - ' + shiftText);
+                $('#actionType').text($('#IsEditMode').val() == 'False' ? 'Unos' : 'Izmena');
             }
         });
 
