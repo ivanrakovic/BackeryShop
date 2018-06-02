@@ -131,8 +131,7 @@ Backery.turnover = (function ($) {
             data: turnData,
             success: function(data) {
                 var m = $('#turnover-detail-data');
-                m.html(data.view);
-                $('#LastTurnoverId').val(data.lastTurnoverId);
+                m.html(data);             
                 reCaluculateAll();
                 caluculateTotal();
                 $('.js-decimal').inputmask(ob);

@@ -17,5 +17,6 @@ namespace BackeryShopDomain.Classes.Entities
         public int BackeryId { get; set; }
         public int LastTurnoverId { get; set; }
         public IEnumerable<TurnoverDetailDto> TurnoverDetails { get; set; }
+        public bool IsExistingTurnover { get; set; }
     }
 }

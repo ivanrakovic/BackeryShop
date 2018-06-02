@@ -1,12 +1,17 @@
-﻿using BackeryShopDomain.Classes;
+﻿using System.Collections.Generic;
+using BackeryShopDomain.Classes.Entities;
 
 namespace BackeryShop.Web.Models.ViewModels
 {
     public class TurnoverProductViewModel
     {
-        public int ProdtId { get; set;}
-        public string DisplayName { get; set; }
-        public decimal Price { get; set; }
-        public decimal Balance { get; set; }
+        public TurnoverProductViewModel()
+        {
+            ProductsData = new List<TurnoverDetailDto>();
+        }
+        public int TurnoverId { get; set; }
+        public int LastTurnoverId { get; set; }
+        public IEnumerable<TurnoverDetailDto> ProductsData { get; set; }
+        public bool IsEditMode { get; set; }
     }
 }

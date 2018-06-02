@@ -1,4 +1,9 @@
-﻿@model List<BackeryShopDomain.Classes.Entities.TurnoverDetailDto>
+﻿@model BackeryShop.Web.Models.ViewModels.TurnoverProductViewModel
+
+
+@Html.HiddenFor(m => m.LastTurnoverId)
+@Html.HiddenFor(m => m.IsEditMode)
+@Html.HiddenFor(m => m.TurnoverId)
 
 <div class="table-responsive">
     <table class="table table-condensed table-striped table-bordered table-hover no-margin">
@@ -19,7 +24,7 @@
         </thead>
         <tbody>
             @{ var i = 1; }
-            @foreach (var item in Model)
+            @foreach (var item in Model.ProductsData)
             {
 
                 <tr class="js-turnover-detail" data-row-id="@i">

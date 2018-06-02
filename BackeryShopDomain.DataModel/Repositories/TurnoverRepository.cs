@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using BackeryShopDomain.Classes;
 using BackeryShopDomain.Classes.Entities;
@@ -40,6 +39,7 @@ namespace BackeryShopDomain.DataModel.Repositories
                         item.PreviousBalance = oldBal.First().NewBalance;
                     }
                 }
+                
             }
             return result;
         }
@@ -60,7 +60,7 @@ namespace BackeryShopDomain.DataModel.Repositories
                           join pl in db.PriceLists on b.PriceListId equals pl.Id
                           join pld in db.PriceListDetails on pl.Id equals pld.PriceListId
                           join p in db.Products on pld.ProductId equals p.Id
-                          where b.Id == backeryId
+                          where b.Id == backeryId && p.Enabled
                           orderby pld.OrderNo descending
                           select new TurnoverDetailDto
                           {
@@ -112,6 +112,7 @@ namespace BackeryShopDomain.DataModel.Repositories
             var targetId = GetTurnoverIdFromDataAndShift(backeryId, date, shift);
             var result = new TurnoverDto
             {
+                Id = targetId.Item2,
                 BackeryId = backeryId,
                 Date = date,
                 ShiftNo = shift,
@@ -124,12 +125,14 @@ namespace BackeryShopDomain.DataModel.Repositories
             if (oldBalances.Any())
             {
                 result.TurnoverDetails = oldBalances;
+                result.IsExistingTurnover = true;
             }
             else
             {
                 var dummyData = GetDataForNewTurnover(backeryId, date, shift);
                 result.TurnoverDetails = dummyData.TurnoverDetails;
                 result.LastTurnoverId = dummyData.Id;
+                result.IsExistingTurnover = false;
             }
             return result;
         }
@@ -190,7 +193,7 @@ namespace BackeryShopDomain.DataModel.Repositories
                 using (var db = new BackeryContext())
                 {
                     //todo update lastId?
-                    var lastId = dataDto.Id;
+                    var id = dataDto.Id;
                     var tDetails = new List<TurnoverDetail>();
                     foreach (var item in dataDto.TurnoverDetails)
                     {
@@ -204,12 +207,12 @@ namespace BackeryShopDomain.DataModel.Repositories
                             Sold = item.Sold,
                             Scrap = item.Scrap,
                             NewBalance = item.NewBalance,
-                            TurnoverId = lastId
+                            TurnoverId = id
                         };
                         tDetails.Add(td);
 
                     };
-                    db.TurnoverDetails.RemoveRange(db.TurnoverDetails.Where(x => x.TurnoverId == dataDto.Id));
+                    db.TurnoverDetails.RemoveRange(db.TurnoverDetails.Where(x => x.TurnoverId == id));
                     db.SaveChanges();
                     db.TurnoverDetails.AddRange(tDetails);
                     db.SaveChanges();

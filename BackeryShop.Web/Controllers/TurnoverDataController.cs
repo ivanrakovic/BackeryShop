@@ -27,9 +27,13 @@ namespace BackeryShop.Web.Controllers
             var newDataForBakery = TurnoverService.GetNextTurnoverDataForBakery(id);
             model.Shift = newDataForBakery.ShiftNo;
             model.Date = newDataForBakery.Date;
-            model.LastTurnoverId = newDataForBakery.LastTurnoverId;
-            model.IsEditMode = false;
-            model.TurnoverProductsViewModels = TurnoverRepository.GetDataForNewTurnover(id);
+            model.ProductList = new TurnoverProductViewModel
+            {
+                LastTurnoverId = newDataForBakery.LastTurnoverId,
+                IsEditMode = false,
+                ProductsData = TurnoverRepository.GetDataForNewTurnover(id)                
+            };
+
             return View(model);
         }
 
@@ -39,7 +43,7 @@ namespace BackeryShop.Web.Controllers
         {
 
             if (ModelState.IsValid)
-            {                               
+            {
                 var i = TurnoverRepository.SaveTurnoverData(turnover);
                 return Json(new { success = true });
             }
@@ -64,19 +68,17 @@ namespace BackeryShop.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetTurnoverDataForDateShift(int backeryId, DateTime date, int shift)
+        public ActionResult GetTurnoverDataForDateShift(int backeryId, DateTime date, int shift)
         {
-            var model = new List<TurnoverDetailDto>();
+            var model = new TurnoverProductViewModel();
             if (ModelState.IsValid)
             {
-                var modelData = TurnoverRepository.GetDataForTurnoverFromDataAndShift(backeryId, date, shift);
-                return Json(new
-                {
-                    view = RenderRazorViewToString(ControllerContext, "TurnoverDetails", modelData.TurnoverDetails.ToList()),
-                    lastTurnoverId = modelData.LastTurnoverId
-                },JsonRequestBehavior.AllowGet);
+                var turnover = TurnoverRepository.GetDataForTurnoverFromDataAndShift(backeryId, date, shift);
+                model.LastTurnoverId = turnover.LastTurnoverId;
+                model.IsEditMode = turnover.IsExistingTurnover;
+                model.ProductsData = turnover.TurnoverDetails;
             }
-            return null;//View("Create", model);
+            return PartialView("TurnoverDetails", model);
         }
 
 
