@@ -15,6 +15,7 @@ Backery.turnover = (function ($) {
         autoclear: false
     };
 
+   
     $('#turnover-date-input').datepicker({
         format: "dd/mm/yyyy",
         todayHighlight: true,
@@ -23,7 +24,7 @@ Backery.turnover = (function ($) {
         language: "sr-latin",
         daysOfWeekDisabled: "6,0"
     }).change(dateChanged)
-     .on('changeDate', dateChanged);
+        .on('changeDate', dateChanged);
 
     function dateChanged() {
         getTurnoverData();
@@ -34,7 +35,25 @@ Backery.turnover = (function ($) {
     });
 
     $('body .js-decimal').inputmask(ob);
-
+    $('body .js-decimal').keydown(function (e) {
+        var self = $(this);
+        var elementName = self[0].id;
+        var startPos = self[0].selectionStart;
+        switch (e.keyCode) {
+            case 37:
+                changeHorizontalElement(elementName, startPos, -1);
+                break;
+            case 38:
+                changeVerticalElement(elementName, +1);
+                break;
+            case 39:
+                changeHorizontalElement(elementName, startPos, +1);
+                break;
+            case 40:
+                changeVerticalElement(elementName, -1);
+                break;
+        }
+    });
 
     $(document).on('focusout', '.js-decimal', function (e) {
         var self = $(this);
@@ -47,6 +66,7 @@ Backery.turnover = (function ($) {
         var price = parseFloat($('#Price_' + id).val()) || 0;
         var newbal = prevbal + bakedNew - sold - scrap;
         var newBalInput = $('#NewBalance_' + id);
+
         if (newbal < 0) {
             if (!newBalInput.hasClassnewBalInput) {
                 newBalInput.addClass('js-decimal-invalid');
@@ -96,7 +116,7 @@ Backery.turnover = (function ($) {
 
         var route = $('#IsEditMode').val() == 'False' ? 'Insert' : 'Update';
 
-        
+
         $.ajax({
             url: '/TurnoverData/' + route + 'DataTurnover',
             type: 'POST',
@@ -111,7 +131,7 @@ Backery.turnover = (function ($) {
                 alert("error");
             }
         });
-        
+
         return false;
     });
 
@@ -135,13 +155,14 @@ Backery.turnover = (function ($) {
             url: "/TurnoverData/GetTurnoverDataForDateShift",
             type: 'GET',
             data: turnData,
-            success: function(data) {
+            success: function (data) {
                 var m = $('#turnover-detail-data');
-                m.html(data);             
+                m.html(data);
                 reCaluculateAll();
                 caluculateTotal();
 
                 $('.js-decimal').inputmask(ob);
+
                 $('#actionDate').text(formatedDate + ' - ' + shiftText);
                 $('#actionType').text($('#IsEditMode').val() == 'False' ? 'Unos' : 'Izmena');
             }
@@ -165,6 +186,28 @@ Backery.turnover = (function ($) {
         });
         $('#totalsum').text(total.toFixed(2) + ' RSD');
         return false;
+    };
+
+    changeHorizontalElement = function (name, inputPos, direction) {
+
+        var selectedEl = $('#' + name);
+        var rowPos = selectedEl.data('row-pos');
+        if (rowPos + direction == 0 || rowPos + direction > 3) return false;
+
+        var value = $('#' + name).val();
+        if (direction == -1 && inputPos > 0) return false;
+        if (direction == 1 && inputPos + 1 <= value.length) return false;
+        var nextId = rowPos + direction;
+        $('#' + name).closest('tr').find("[data-row-pos='" + nextId + "']").focus(); 
+        
+    };
+
+    changeVerticalElement = function (name, rowPos) {
+
+        var elNameArr = name.split('_');
+        var targetId = elNameArr[0] + '_' + (parseInt(elNameArr[1]) - rowPos).toString();
+        $('#' + targetId).focus(); 
+
     };
     return me;
 }(jQuery));
