@@ -167,7 +167,7 @@ namespace BackeryShopDomain.DataModel.Repositories
             {
                 BackeryId = backeryId,
                 ShiftNo = 1,
-                Date = DateTime.Today
+                Date = ReturnTurnoverDate(DateTime.Today, 0)
             };
             using (var db = new BackeryContext())
             {
@@ -177,7 +177,7 @@ namespace BackeryShopDomain.DataModel.Repositories
                 {
                     result.BackeryId = backery.Id;
                     result.ShiftNo = (backery.NumberOfShifts == turnData.ShiftNo) ? 1 : turnData.ShiftNo + 1;
-                    result.Date = (backery.NumberOfShifts == turnData.ShiftNo) ? turnData.Date.AddDays(1) : turnData.Date;
+                    result.Date = (backery.NumberOfShifts == turnData.ShiftNo) ? ReturnTurnoverDate(turnData.Date, 1) : turnData.Date;
                     result.LastTurnoverId = turnoverId;
                 }
             }
@@ -348,7 +348,7 @@ namespace BackeryShopDomain.DataModel.Repositories
             {              
                 result.BackeryId = backery.Id;
                 result.ShiftNo = (shift == 1) ? backery.NumberOfShifts : shift - 1;
-                result.Date = (shift == 1) ? date.AddDays(-1) : date;
+                result.Date = (shift == 1) ? ReturnTurnoverDate(date, -1) : date;
 
                 var t = db.Turnovers.Where(x => x.Date == result.Date && x.BackeryId == backeryId && x.ShiftNo == result.ShiftNo);
                 if (t.Any())
@@ -370,7 +370,7 @@ namespace BackeryShopDomain.DataModel.Repositories
             {
                 result.BackeryId = backery.Id;
                 result.ShiftNo = (shift == backery.NumberOfShifts) ? 1 : shift + 1;
-                result.Date = (shift == backery.NumberOfShifts) ? date.AddDays(1) : date;
+                result.Date = (shift == backery.NumberOfShifts) ? ReturnTurnoverDate(date, 1) : date;
 
                 var t = db.Turnovers.Where(x => x.Date == result.Date && x.BackeryId == backeryId && x.ShiftNo == result.ShiftNo);
                 if (t.Any())
@@ -380,6 +380,24 @@ namespace BackeryShopDomain.DataModel.Repositories
                     result.TurnoverDetails = GetBalancesForTurnoverId(backeryId, turnData.Id);
                 }
             }
+            return result;
+        }
+
+        private static DateTime ReturnTurnoverDate(DateTime date, int days)
+        {
+            var result = date.AddDays(days);
+            switch (result.DayOfWeek)
+            {
+                case DayOfWeek.Sunday:
+                    result = days < 0 ? result.AddDays(-2) : result.AddDays(1);
+                    break;
+                case DayOfWeek.Saturday:
+                    result = days < 0 ? result.AddDays(-1) : result.AddDays(2);
+                    break;
+                default:
+                    break;
+            }
+
             return result;
         }
     }
