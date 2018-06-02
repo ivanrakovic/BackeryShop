@@ -21,6 +21,7 @@ Backery.turnover = (function ($) {
         weekStart: 1,
         todayBtn: "linked",
         language: "sr-latin",
+        daysOfWeekDisabled: "6,0"
     }).change(dateChanged)
      .on('changeDate', dateChanged);
 
