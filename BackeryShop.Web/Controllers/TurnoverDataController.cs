@@ -1,14 +1,8 @@
-﻿using System.Linq;
-using System.Net.Http;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using BackeryShop.Web.Models.ViewModels;
 using BackeryShop.Web.Services;
-using BackeryShopDomain.Classes;
 using BackeryShopDomain.Classes.Entities;
-using BackeryShopDomain.DataModel;
-using Microsoft.SqlServer.Server;
 using BackeryShopDomain.DataModel.Repositories;
-using System.Collections.Generic;
 using System;
 using System.IO;
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using BackeryShopDomain.Classes.Entities;
 
 namespace BackeryShop.Web.Models.ViewModels

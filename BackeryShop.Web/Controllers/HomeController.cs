@@ -1,7 +1,5 @@
 ﻿using BackeryShop.Web.Models.ViewModels;
-using BackeryShopDomain.DataModel;
 using BackeryShopDomain.DataModel.Repositories;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace BackeryShop.Web.Controllers
