@@ -6,7 +6,11 @@ namespace BackeryShopDomain.DataModel
 {
     public class BackeryContext: DbContext
     {
-	    public DbSet<Backery> Backeries { get; set; }
+        public BackeryContext() : base("name=BackeryDBConnection")
+        {
+        }
+
+        public DbSet<Backery> Backeries { get; set; }
 	    public DbSet<PriceList> PriceLists { get; set; }
 	    public DbSet<PriceListDetail> PriceListDetails { get; set; }
 	    public DbSet<Product> Products { get; set; }
