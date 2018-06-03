@@ -41,10 +41,10 @@
                 @Html.DisplayFor(modelItem => item.OrderNo)
             </td>
             <td>
-                <a class="js-detail btn btn-warning" href="#" data-master-id="@item.PriceListId" data-id="@item.Id" data-route="pricelistdetails" data-action="Edit">
+                <a class="js-detail btn btn-warning" href="#" data-master-id="@item.PriceListId" data-id="@item.Id" data-route="pricelistdetails" data-action="Edit" data-toggle="tooltip" title="Izmenite podatke">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </a> |
-                <a class="js-detail btn btn-danger" href="#" data-master-id="@item.PriceListId" data-id="@item.Id" data-route="pricelistdetails" data-action="Delete">
+                <a class="js-detail btn btn-danger" href="#" data-master-id="@item.PriceListId" data-id="@item.Id" data-route="pricelistdetails" data-action="Delete" data-toggle="tooltip" title="Brisanje prozivoda iz liste">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
             </td>
