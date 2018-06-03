@@ -7,7 +7,9 @@
 <h2>Pregled pekara</h2>
 
 <p>
-    @Html.ActionLink("Dodavanje nove", "Create")
+    <a href="@Url.Action("Create", "Backeries")" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nova pekara
+    </a>
 </p>
 <table class="table">
     <tr>
