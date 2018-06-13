@@ -27,6 +27,7 @@ textarea {
         text-align: right;
         padding: 3px 3px;
         height: 25px;
+        width: 80px;
     }
 
     input.form-control.js-decimal-invalid {

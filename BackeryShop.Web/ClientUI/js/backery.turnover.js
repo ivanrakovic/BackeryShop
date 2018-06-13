@@ -6,7 +6,7 @@ Backery.turnover = (function ($) {
 
     var ob = {
         alias: "decimal",
-        integerDigits: 5,
+        integerDigits: 10,
         digits: 2,
         digitsOptional: false,
         allowZero: true,
