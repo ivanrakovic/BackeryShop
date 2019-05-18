@@ -1,0 +1,76 @@
+﻿@model BackeryShop.Web.Models.ViewModels.TurnoverViewModel
+
+
+@{
+    ViewBag.Title = "Dodaj novu listu";
+}
+<h2><span id="actionType">Unos </span>
+    za @Model.Backery.Name
+    </h2>
+<p><span id="actionDate"></span></p>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Backery.Id, new { id = "BackeryId" })
+  
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div id="turnover-date-input" data-date="@Model.Date.ToString("dd/MM/yyyy")"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @for (int j = 1; j <= Model.Backery.NumberOfShifts; j++)
+                    {
+                        <div class="radio">
+                            <label>
+                                <input type="radio" class="js-turnover-filter" name="shiftgrp" value="@j" @(j == Model.Shift ? "checked" : string.Empty)>
+                                <span>Smena @j</span>
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <dl>
+                        <dt>
+                            Ukupno
+                        </dt>
+
+                        <dd id="totalsum">
+                            0.00 RSD
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <a class="btn btn-success js-turnover-submit" href="#">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Snimi
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <div id="turnover-detail-data">
+                @{ Html.RenderPartial("TurnoverDetails", Model.ProductList); }
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/datepicker")
+    @Styles.Render("~/Content/datepicker")
+    @Scripts.Render("~/bundles/jqueryinputmask")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/backery")
+}

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<BackeryShopDomain.Classes.Product>
+
+@{
+    ViewBag.Title = "Pregled proizvoda";
+}
+
+<h2>Pregled proizvoda</h2>
+
+<a href="@Url.Action("Create", "Products")" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novi proizvod
+</a>
+
+
+
+
+<div id="products">
+    <hr/>
+        <div class="form-inline">
+
+            <p>
+
+
+                <input class="search form-control text-box" placeholder="Pretražite po proizvodu" />
+                <button class="sort btn btn-primary" data-sort="productname">
+                    Sortiraj po nazivu
+                </button>
+            </p>
+
+
+        </div>
+        @**@
+   
+    <table class="table table-responsive">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Enabled)
+            </th>
+            <th>Akcija</th>
+        </tr>
+        <tbody class="list">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="col-md-6 productname">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="col-md-3 isactive">
+                        @Html.DisplayFor(modelItem => item.Enabled)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Izmenite", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Brisanje", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+@section Scripts {
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+    <script>
+        var options = {
+            valueNames: ['productname', 'isactive']
+        };
+
+        var userList = new List('products', options);
+    </script>
+
+}

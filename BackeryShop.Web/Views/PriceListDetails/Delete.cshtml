@@ -1,0 +1,54 @@
+﻿@model BackeryShopDomain.Classes.PriceListDetail
+
+@{
+    Layout = null;
+    ViewBag.Title = "Brisanje";
+}
+
+<h3>Brisanje proizvoda iz cenovnika</h3>
+<div>
+    <h4>Da li želite da obrišete? </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceList.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceList.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderNo)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-actions no-color">
+            <input type="button" value="Brisanje" class="btn btn-danger btn-default-detail" data-master-id="@Model.PriceListId" data-route="pricelistdetails" data-action="Delete" />
+        </div>
+    }
+</div>

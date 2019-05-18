@@ -1,0 +1,67 @@
+﻿@model BackeryShop.Web.Models.ViewModels.TurnoverProductViewModel
+
+
+@Html.HiddenFor(m => m.LastTurnoverId)
+@Html.HiddenFor(m => m.IsEditMode)
+@Html.HiddenFor(m => m.TurnoverId)
+
+<div class="table-responsive">
+    <table class="table table-condensed table-striped table-bordered table-hover no-margin">
+        <thead>
+        <tr class="success">
+                <th class="col-md-1">
+                    Prod Id
+                </th>
+                <th class="col-md-2">Naziv</th>
+                <th class="col-md-1">Cena</th>
+                <th class="col-md-1">Staro Stanje</th>
+                <th class="col-md-1">Došlo</th>
+                <th class="col-md-1">Škart</th>
+                <th class="col-md-1">Prodato</th>
+                <th class="col-md-1">Novo Stanje</th>
+                <th class="col-md-1">Ukupno</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var i = 1; }
+            @foreach (var item in Model.ProductsData)
+            {
+
+                <tr class="js-turnover-detail" data-row-id="@i">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductId)
+                        @Html.HiddenFor(modelItem => item.ProductId, new { id = "ProductId" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                        @Html.HiddenFor(modelItem => item.ProductName, new { id = "ProductName" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                        @Html.HiddenFor(modelItem => item.Price, new { id = "Price_" + @i })
+                    </td>
+                    <td class="hidden-phone">
+                        <input class="form-control js-decimal" type="text" id="PreviousBalance_@i" readonly value="@item.PreviousBalance" tabindex="-1" />
+                    </td>
+
+                    <td class="hidden-phone">
+                        <input class="form-control js-decimal" type="text" id="BakedNew_@i" value="@item.BakedNew" data-row-pos="1"/>
+                    </td>
+                    <td>
+                        <input class="form-control js-decimal" type="text" id="Scrap_@i" value="@item.Scrap" data-row-pos="2"/>
+                    </td>
+                    <td>
+                        <input class="form-control js-decimal" type="text" id="Sold_@i" value="@item.Sold" data-row-pos="3"/>
+                    </td>
+                    <td class="hidden-phone">
+                        <input class="form-control js-decimal" type="text" id="NewBalance_@i" value="0" readonly tabindex="-1" />
+                    </td>
+                    <td>
+                        <input class="form-control js-decimal" type="text" id="Total_@i" readonly value="0" tabindex="-1" />
+                    </td>
+                </tr>
+                i = i + 1;
+            }
+        </tbody>
+    </table>
+</div>

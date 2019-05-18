@@ -1,0 +1,48 @@
+﻿@model BackeryShopDomain.Classes.Backery
+
+@{
+    ViewBag.Title = "Brisanje";
+}
+
+<h2>Brisanje pekare</h2>
+
+<h3>Da li želite da obrišete?</h3>
+<div>
+    <h4>Pekara: @Html.DisplayFor(model => model.Name)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceList.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceList.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfShifts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfShifts)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Brisanje" class="btn btn-default" /> |
+            @Html.ActionLink("Nazad na listu", "Index")
+        </div>
+    }
+</div>

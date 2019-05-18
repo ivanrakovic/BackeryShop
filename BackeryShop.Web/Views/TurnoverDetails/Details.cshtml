@@ -1,0 +1,82 @@
+﻿@model BackeryShopDomain.Classes.TurnoverDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TurnoverDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Turnover.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Turnover.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PreviousBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PreviousBalance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BakedNew)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BakedNew)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Scrap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Scrap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewBalance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Izmenite", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Nazad na listu", "Index")
+</p>

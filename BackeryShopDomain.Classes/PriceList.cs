@@ -1,13 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BackeryShopDomain.Classes
 {
 	public class PriceList
 	{
 		public int Id { get; set; }
-		public string Name { get; set; }
+
+		[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
+		[Index("IX_PriceListName", IsUnique = true)]
+        [Display(Name = "Naziv cenovnika")]
+        public string Name { get; set; }
 
 		public ICollection<PriceListDetail> PriceListDetail { get; set; }
-		public ICollection<Bakery> Bakery { get; set; }
+		public ICollection<Backery> Backery { get; set; }
 	}
 }

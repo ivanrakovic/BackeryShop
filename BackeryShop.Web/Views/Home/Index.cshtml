@@ -1,0 +1,33 @@
+﻿@model BackeryShop.Web.Models.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Početni ekran";
+}
+
+<div class="jumbotron">
+    <h1>Ristic pekara</h1>
+    <p class="lead">
+        
+        Aplikacija za unos podataka za pekaru
+    </p>
+    <p>
+        @Html.ActionLink("Podešavanja >>", "Settings", "Home", null, new { @class = "btn btn-primary btn-lg" })
+        </p>
+</div>
+
+<div class="row">
+    @if (Model.ShowTurnoverInputs)
+    {
+        foreach (var item in Model.BackeriesList)
+        {
+            <div class="col-md-4">
+                <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+                <p>
+                    <a href="@Url.Action("Create", "TurnoverData", new { id = item.Id })" class="btn btn-info btn-lg btn-blocks">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novi unos prometa &raquo;
+                    </a>
+                </p>
+            </div>
+        }
+    }
+</div>
